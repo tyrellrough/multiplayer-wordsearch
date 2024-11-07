@@ -18,10 +18,13 @@ const gameOptionsSlice = createSlice({
     initialState: initialState,
     reducers: {
         setPuzzleSize: (state, action) => {
-            state.value = action.payload;
+            state.value.puzzleSize = action.payload;
         },
         setWordTheme: (state, action) => {
-            state.value = action.payload;
+            state.value.wordTheme = action.payload;
         }
     }
 })
+
+export const {setPuzzleSize, setWordTheme} = gameOptionsSlice.actions;
+export default gameOptionsSlice.reducer;
