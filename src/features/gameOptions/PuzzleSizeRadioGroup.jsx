@@ -12,16 +12,16 @@ export default function PuzzleSizeRadioGroup() {
 
     return(
         <Fragment>
-            <div>
-                <div>
+            <div className="flex justify-center gap-3">
+                <div className="flex flex-col justify-evenly">
                     <label htmlFor="board-size-small">Small</label>
                     <label htmlFor="board-size-medium">Medium</label>
                     <label htmlFor="board-size-large">Large</label>
                     <label htmlFor="board-size-extra-large">Extra Large</label>
                 </div>
 
-                <div>
-                    <input type="radio" value="small" name="board-size" id="board-size-small"
+                <div className="flex flex-col justify-evenly">
+                    <input type="radio" value="small" name="board-size" id="board-size-small" className=""
                            checked={puzzleSizeSelector === "small"}
                            onChange={onPuzzleSizeChange}/>
                     <input type="radio" value="medium" name="board-size" id="board-size-medium"

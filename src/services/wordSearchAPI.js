@@ -5,9 +5,20 @@ export const wordSearchAPI = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'https://localhost:7033/api'}),
     endpoints: (builder) => ({
         getWordsByCategory: builder.query({
-           query: (categoryName) => `words?categoryName=${categoryName}&numRecordsReturn=5&maxWordSize=5`,
+            query: (argumentObject)  => {
+                const {categoryName, numRecords, maxWordSize} = argumentObject;
+                console.log(categoryName, numRecords, maxWordSize);
+                return {
+                    url: `words?categoryName=${categoryName}&numRecordsReturn=${numRecords}&maxWordSize=${maxWordSize}`,
+                }
+            }
         }),
+
+        getCategories: builder.query({
+            query: ()  => `categories`
+        })
+
     }),
 })
 
-export const { useGetWordsByCategoryQuery } = wordSearchAPI;
+export const { useGetWordsByCategoryQuery , useGetCategoriesQuery} = wordSearchAPI;

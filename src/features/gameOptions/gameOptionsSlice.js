@@ -3,15 +3,10 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = { value: {
         puzzleSize: 'medium',
-        wordTheme: 'fruit',
-        wordThemeList: '',
+        wordTheme: 'fruits',
         wordThemeStatus: 'idle',
     }
 }
-
-// const fetchWordThemes = createAsyncThunk(
-//     'gameOptions/fetchWordThemes',
-// )
 
 const gameOptionsSlice = createSlice({
     name: 'gameOptions',
