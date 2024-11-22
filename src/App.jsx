@@ -5,6 +5,7 @@ import SinglePlayerPage from "./features/pageSwitcher/SinglePlayerPage.jsx";
 import CreateMultiplayerPage from "./features/pageSwitcher/CreateMultiplayerPage.jsx";
 import JoinMultiplayerPage from "./features/pageSwitcher/JoinMultiplayerPage.jsx";
 import LobbyPage from "./features/pageSwitcher/LobbyPage.jsx";
+import NavigationBar from "./features/pageSwitcher/NavigationBar.jsx";
 
 function App() {
 
@@ -12,11 +13,19 @@ function App() {
 
     if(currentPage === "mainMenu") {
         return (
-            <MainMenuPage />
+            <div className="h-screen">
+                <NavigationBar />
+                <MainMenuPage />
+            </div>
+
         )
     } else if (currentPage === "singlePlayer") {
         return (
-            <SinglePlayerPage />
+            <div className="h-screen">
+                <NavigationBar />
+                <SinglePlayerPage />
+            </div>
+
         )
     } else if (currentPage === "newMultiplayer") {
         return (

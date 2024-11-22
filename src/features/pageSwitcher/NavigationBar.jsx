@@ -4,7 +4,7 @@ import FullScreenToggleButton from "../screen/FullScreenToggleButton.jsx";
 export default function NavigationBar() {
 
     return (
-        <div>
+        <div className="w-full flex justify-between">
             <HomeButton />
             <FullScreenToggleButton />
         </div>

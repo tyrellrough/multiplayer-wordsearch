@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-//import {createApi} from '@reduxjs/toolkit/query/react'
+
 
 const initialState = { value: {
         puzzleSize: 'medium',

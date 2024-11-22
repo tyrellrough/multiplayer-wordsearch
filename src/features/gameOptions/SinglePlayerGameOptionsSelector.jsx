@@ -9,7 +9,7 @@ export default function SinglePlayerGameOptionsSelector() {
             <PuzzleSizeRadioGroup />
 
             <p>Word Theme</p>
-            <WordThemeDropDown />
+
         </div>
     );
 }
