@@ -6,10 +6,9 @@ export const wordSearchAPI = createApi({
     endpoints: (builder) => ({
         getWordsByCategory: builder.query({
             query: (argumentObject)  => {
-                const {categoryName, numRecords, maxWordSize} = argumentObject;
-                console.log(categoryName, numRecords, maxWordSize);
+                const {categoryName, maxNumberOfWords, maxWordLength} = argumentObject;
                 return {
-                    url: `words?categoryName=${categoryName}&numRecordsReturn=${numRecords}&maxWordSize=${maxWordSize}`,
+                    url: `words?categoryName=${categoryName}&numRecordsReturn=${maxNumberOfWords}&maxWordSize=${maxWordLength}`,
                 }
             }
         }),

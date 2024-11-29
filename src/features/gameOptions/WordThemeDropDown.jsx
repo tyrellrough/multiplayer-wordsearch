@@ -1,14 +1,14 @@
 import {useGetCategoriesQuery} from "../../services/wordSearchAPI.js";
 import {Fragment} from "react";
 import {useDispatch} from "react-redux";
-import {setWordTheme} from "./gameOptionsSlice.js";
+import {setWordsCategory} from "./gameOptionsSlice.js";
 
 export default function WordThemeDropDown(){
     const {data = [], error, isLoading}  = useGetCategoriesQuery(undefined, undefined);
 
     const dispatch = useDispatch();
     const onWordThemeSelection = e => {
-        dispatch(setWordTheme(e.target.value));
+        dispatch(setWordsCategory(e.target.value));
     }
 
     if(error) {

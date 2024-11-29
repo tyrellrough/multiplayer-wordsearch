@@ -1,7 +1,5 @@
-
 import BackButton from "./BackButton.jsx";
 import SinglePlayerGameOptionsSelector from "../gameOptions/SinglePlayerGameOptionsSelector.jsx";
-import {useGetWordsByCategoryQuery, } from "../../services/wordSearchAPI.js";
 import NavigationButton from "./NavigationButton.jsx";
 
 export default function SinglePlayerPage() {
@@ -17,7 +15,7 @@ export default function SinglePlayerPage() {
             <div className="flex flex-col gap-4 rounded-md border-2 border-black  w-1/3">
                 <p className="text-4xl pt-4">Single Player</p>
                 <SinglePlayerGameOptionsSelector/>
-                <NavigationButton text="Start" targetPage={'TODO'}/>
+                <NavigationButton text="Start" targetPage={'singlePlayerGame'}/>
             </div>
 
 

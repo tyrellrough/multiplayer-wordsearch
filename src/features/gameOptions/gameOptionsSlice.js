@@ -1,11 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 
-const initialState = { value: {
+const initialState = { 
         puzzleSize: 'medium',
-        wordTheme: 'fruits',
-        wordThemeStatus: 'idle',
-    }
+        wordsCategory: 'fruits',
+        puzzleWidth: 10,
+        maxWordLength: 10,
+        maxNumberOfWords: 8,
 }
 
 const gameOptionsSlice = createSlice({
@@ -13,13 +14,36 @@ const gameOptionsSlice = createSlice({
     initialState: initialState,
     reducers: {
         setPuzzleSize: (state, action) => {
-            state.value.puzzleSize = action.payload;
+            state.puzzleSize = action.payload;
+
+            switch (action.payload) {
+                case "small":
+                    state.maxNumberOfWords = 4;
+                    state.puzzleWidth = 6;
+                    state.maxWordLength = 6;
+                    break;
+                case "medium":
+                    state.maxNumberOfWords = 8;
+                    state.puzzleWidth = 10;
+                    state.maxWordLength = 10;
+                    break;
+                case "large":
+                    state.maxNumberOfWords = 12;
+                    state.puzzleWidth = 16;
+                    state.maxWordLength = 16;
+                    break;
+                case "extraLarge":
+                    state.maxNumberOfWords = 20;
+                    state.puzzleWidth = 20;
+                    state.maxWordLength = 20;
+            }
         },
-        setWordTheme: (state, action) => {
-            state.value.wordTheme = action.payload;
+
+        setWordsCategory: (state, action) => {
+            state.wordsCategory = action.payload;
         }
     }
 })
 
-export const {setPuzzleSize, setWordTheme} = gameOptionsSlice.actions;
+export const {setPuzzleSize, setWordsCategory} = gameOptionsSlice.actions;
 export default gameOptionsSlice.reducer;

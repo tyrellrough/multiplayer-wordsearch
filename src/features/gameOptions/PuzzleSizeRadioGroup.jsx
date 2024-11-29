@@ -3,7 +3,7 @@ import {setPuzzleSize} from "./gameOptionsSlice.js";
 import {Fragment} from 'react'
 
 export default function PuzzleSizeRadioGroup() {
-    const puzzleSizeSelector = useSelector(state => state.gameOptions.value.puzzleSize);
+    const puzzleSizeSelector = useSelector(state => state.gameOptions.puzzleSize);
     const dispatch = useDispatch();
 
     const onPuzzleSizeChange = (e) => {
@@ -30,8 +30,8 @@ export default function PuzzleSizeRadioGroup() {
                     <input type="radio" value="large" name="board-size" id="board-size-large"
                            checked={puzzleSizeSelector === "large"}
                            onChange={onPuzzleSizeChange}/>
-                    <input type="radio" value="extra-large" name="board-size" id="board-size-extra-large"
-                           checked={puzzleSizeSelector === "extra-large"}
+                    <input type="radio" value="extraLarge" name="board-size" id="board-size-extra-large"
+                           checked={puzzleSizeSelector === "extraLarge"}
                            onChange={onPuzzleSizeChange}/>
                 </div>
             </div>
