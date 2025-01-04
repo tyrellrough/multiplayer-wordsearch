@@ -4,7 +4,7 @@ import MainMenuPage from "./features/pageSwitcher/MainMenuPage.jsx";
 import SinglePlayerPage from "./features/pageSwitcher/SinglePlayerPage.jsx";
 import CreateMultiplayerPage from "./features/pageSwitcher/CreateMultiplayerPage.jsx";
 import JoinMultiplayerPage from "./features/pageSwitcher/JoinMultiplayerPage.jsx";
-import LobbyPage from "./features/pageSwitcher/LobbyPage.jsx";
+import MultiplayerPage from "./features/gameMultiplayer/MultiplayerPage.jsx";
 import NavigationBar from "./features/pageSwitcher/NavigationBar.jsx";
 import GameContainerSinglePlayer from "./features/gameSinglePlayer/GameContainerSinglePlayer.jsx";
 
@@ -36,10 +36,6 @@ function App() {
             </div>
 
         )
-
-
-
-
     } else if (currentPage === "newMultiplayer") {
         return (
             <CreateMultiplayerPage />
@@ -48,9 +44,9 @@ function App() {
         return (
             <JoinMultiplayerPage />
         )
-    } else if (currentPage === "lobby") {
+    } else if (currentPage === "multiplayer") {
         return (
-            <LobbyPage />
+            <MultiplayerPage />
         )
     }
 

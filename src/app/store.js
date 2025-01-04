@@ -5,14 +5,17 @@ import gameOptionsReducer from "../features/gameOptions/gameOptionsSlice.js";
 import pageSwitcherReducer from "../features/pageSwitcher/pageSwitcherSlice.js";
 import screenReducer from "../features/screen/screenSlice.js";
 import singlePlayerGameReducer from "../features/gameSinglePlayer/singlePlayerGameSlice.js";
+import multiplayerGameReducer from "../features/gameMultiPlayer/multiPlayerGameSlice.js";
 
 export const store = configureStore({
     reducer: {
         gameOptions: gameOptionsReducer,
         pageSwitcher: pageSwitcherReducer,
         screen: screenReducer,
-        [wordSearchAPI.reducerPath]: wordSearchAPI.reducer,
         singlePlayerGame: singlePlayerGameReducer,
+        multiPlayerGame: multiplayerGameReducer,
+        [wordSearchAPI.reducerPath]: wordSearchAPI.reducer,
+
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()

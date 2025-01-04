@@ -7,6 +7,8 @@ const initialState = {
         puzzleWidth: 10,
         maxWordLength: 10,
         maxNumberOfWords: 8,
+        gameName: "",
+        gameGuid: null,
 }
 
 const gameOptionsSlice = createSlice({
@@ -38,12 +40,17 @@ const gameOptionsSlice = createSlice({
                     state.maxWordLength = 20;
             }
         },
-
         setWordsCategory: (state, action) => {
             state.wordsCategory = action.payload;
+        },
+        setGameName: (state, action) => {
+            state.gameName = action.payload;
+        },
+        setGameGuid: (state, action) => {
+            state.gameGuid = action.payload;
         }
     }
 })
 
-export const {setPuzzleSize, setWordsCategory} = gameOptionsSlice.actions;
+export const {setPuzzleSize, setWordsCategory, setGameName, setGameGuid} = gameOptionsSlice.actions;
 export default gameOptionsSlice.reducer;

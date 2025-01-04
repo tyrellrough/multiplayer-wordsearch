@@ -1,29 +1,12 @@
 import BackButton from './BackButton';
-import {HubConnectionBuilder} from "@microsoft/signalr";
-import {useEffect, useState} from "react";
-
-
+import MultiplayerGameOptionsSelector from "../gameOptions/MultiplayerGameOptionsSelector.jsx";
+import NavigationButton from "./NavigationButton.jsx";
+import {useGetNewGameNameQuery} from "../../services/wordSearchAPI.js";
 
 export default function CreateMultiplayerPage() {
 
-    const [message1, setMessage] = useState("");
-
-    useEffect(() => {
-        const connection = new HubConnectionBuilder()
-            .withUrl("https://localhost:7033/Game")
-            .build();
-
-        connection.start().then(r => connection.invoke("SendMessage", "red"))
 
 
-
-
-
-        connection.on("ReceiveMessage", (message) => {
-            console.log(message);
-            setMessage(message);
-        });
-    }, [message1])
 
 
 
@@ -31,7 +14,10 @@ export default function CreateMultiplayerPage() {
         <div>
             <p>Create multiplayer</p>
             <BackButton/>
-            <p>{message1}</p>
+            <MultiplayerGameOptionsSelector />
+            <NavigationButton text="Create New Game Lobby" targetPage={'multiplayer'}/>
+
+
         </div>
     )
 }

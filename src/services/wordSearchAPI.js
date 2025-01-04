@@ -13,11 +13,22 @@ export const wordSearchAPI = createApi({
             }
         }),
 
+        getNewGameName: builder.query({
+            query: () => 'words/threeRandomWords',
+        }),
+
         getCategories: builder.query({
             query: ()  => `categories`
+        }),
+
+        getNewGameGuid: builder.query({
+            query: () => 'game/newGUID'
         })
+
+
 
     }),
 })
 
-export const { useGetWordsByCategoryQuery , useGetCategoriesQuery} = wordSearchAPI;
+export const { useGetWordsByCategoryQuery , useGetCategoriesQuery,
+    useGetNewGameNameQuery, useGetNewGameGuidQuery} = wordSearchAPI;
