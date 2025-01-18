@@ -22,8 +22,6 @@ export default function GameContainerSinglePlayer() {
     argumentsObject.maxNumberOfWords = maxNumberOfWords;
     argumentsObject.maxWordLength = maxWordLength;
 
-
-    //Need to sort out success thing. its loading after rendering.
     const {data,error, isSuccess, isLoading}  = useGetWordsByCategoryQuery(argumentsObject);
     const [wordsList, setWordsList] = useState([]);
     const [isDone, setIsDone] = useState(false);
