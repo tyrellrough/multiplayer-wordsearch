@@ -1,7 +1,7 @@
 import {useGetNewGameGuidQuery} from "../../services/wordSearchAPI.js";
 import {Fragment} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setGameGuid, setGameName} from "./gameOptionsSlice.js";
+import {setGameGuid} from "./gameOptionsSlice.js";
 
 export default function GameGuid() {
     const {data: gameGuidData = [], error, isLoading}  = useGetNewGameGuidQuery(undefined, undefined);
@@ -23,7 +23,7 @@ export default function GameGuid() {
 
     return (
         <Fragment>
-            <p>{gameGuid}</p>
+            <p>{gameGuidData}</p>
         </Fragment>
     );
 }

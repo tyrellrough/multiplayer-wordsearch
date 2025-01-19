@@ -1,7 +1,7 @@
 //goes in create game comp
 import {useDispatch} from 'react-redux'
 import {changePage} from "../pageSwitcher/pageSwitcherSlice.js";
-import {setCurrentPageState, setGameGUID} from "./multiPlayerGameSlice.js";
+import {setCurrentPageState, setLobbyState} from "./multiPlayerGameSlice.js";
 
 export default function CreateGameButton() {
 
@@ -10,7 +10,7 @@ export default function CreateGameButton() {
     const clickHandler = () => {
 
         dispatch(setCurrentPageState("lobby"))
-        //(setIsNewLobby)
+        dispatch(setLobbyState("newLobby"))
         dispatch(changePage("multiplayer"))
     }
 

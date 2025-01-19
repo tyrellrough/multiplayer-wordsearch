@@ -24,6 +24,7 @@ export default function GameName() {
         randomWordsList.push(word.text)
     })
     //et tempGameName = randomWordsList.join("-");
+    //console.log(randomWordsList);
     dispatch(setGameName(randomWordsList.join("-")));
 
     return (
