@@ -14,6 +14,7 @@ import {HubConnectionBuilder} from "@microsoft/signalr";
 import {useDispatch, useSelector} from "react-redux";
 import {setGameGUID, setGameName, setGameSize} from "./multiPlayerGameSlice.js";
 import Lobby from "./Lobby.jsx";
+import JoinGameList from "./JoinGameList.jsx";
 
 export default function MultiplayerPage() {
 
@@ -50,14 +51,11 @@ export default function MultiplayerPage() {
                 <p>Waiting for connection to establish</p>
             </div>
         )
-    } else if(pageState === "joinGameList") {
-        //get a list of games
-        //convert the list to elements
-        //display elements
+    } else if(pageState === "gamesList") {
         return(
-            <div>
-                <p>Join game list</p>
-            </div>
+            <Fragment>
+                <JoinGameList connection={connection}/>
+            </Fragment>
         )
     } else if(pageState === "lobby") {
         //add user to group named the guid

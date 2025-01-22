@@ -1,4 +1,4 @@
-export default function LobbyGameDetailsElement(props) {
+export default function GameListElement(props) {
 
     return(
         <div>

@@ -1,4 +1,5 @@
 import NavigationButton from "./NavigationButton.jsx";
+import LoadGameListButton from "../gameMultiplayer/LoadGameListButton.jsx";
 
 
 export default function MainMenuPage() {
@@ -14,6 +15,7 @@ export default function MainMenuPage() {
                     <NavigationButton text={'Singleplayer'} targetPage={'newSinglePlayer'}/>
                     <NavigationButton text={'New Multiplayer'} targetPage={'newMultiplayer'}/>
                     <NavigationButton text={'Join Multiplayer'} targetPage={'joinMultiplayer'}/>
+                    <LoadGameListButton />
                 </div>
             </div>
 

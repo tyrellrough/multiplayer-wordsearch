@@ -3,7 +3,6 @@ import {useSelector} from "react-redux";
 import MainMenuPage from "./features/pageSwitcher/MainMenuPage.jsx";
 import SinglePlayerPage from "./features/pageSwitcher/SinglePlayerPage.jsx";
 import CreateMultiplayerPage from "./features/pageSwitcher/CreateMultiplayerPage.jsx";
-import JoinMultiplayerPage from "./features/pageSwitcher/JoinMultiplayerPage.jsx";
 import MultiplayerPage from "./features/gameMultiplayer/MultiplayerPage.jsx";
 import NavigationBar from "./features/pageSwitcher/NavigationBar.jsx";
 import GameContainerSinglePlayer from "./features/gameSinglePlayer/GameContainerSinglePlayer.jsx";
@@ -39,10 +38,6 @@ function App() {
     } else if (currentPage === "newMultiplayer") {
         return (
             <CreateMultiplayerPage />
-        )
-    } else if (currentPage === "joinMultiplayer") {
-        return (
-            <JoinMultiplayerPage />
         )
     } else if (currentPage === "multiplayer") {
         return (
