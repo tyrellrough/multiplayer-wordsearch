@@ -6,6 +6,7 @@ export const multiPlayerGameSlice = createSlice({
         gameGUID : "",
         gameName : "",
         gameSize: "",
+        gameTheme: "",
         currentPageState: "",
         lobbyState: "",
         connectionState: "",
@@ -23,16 +24,16 @@ export const multiPlayerGameSlice = createSlice({
         setLobbyState: (state, action) => {
             state.lobbyState = action.payload;
         },
-        setConnectionState: (state, action) => {
-            state.connectionState = action.payload;
-        },
         setGameSize: (state, action) => {
             state.gameSize = action.payload;
+        },
+        setWordsTheme: (state, action) => {
+            state.gameTheme = action.payload;
         }
     }
 })
 
 export const {setCurrentPageState, setGameName,
     setGameGUID, setLobbyState,
-    setGameSize} = multiPlayerGameSlice.actions;
+    setGameSize, setWordsTheme} = multiPlayerGameSlice.actions;
 export default multiPlayerGameSlice.reducer;

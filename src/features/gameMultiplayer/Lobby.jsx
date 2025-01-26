@@ -18,13 +18,14 @@ export default function Lobby(props) {
                 return <div>{players}</div>
             }
             //console.log(playersElements())
+            console.log(playersElements);
             setPlayersElementsList(playersElements());
         })
     }
 
-    // function newPlayerJoined() {
-    //
-    // }
+    props.connection.on("", () => {
+        UpdateNumPagesAndGames();
+    })
 
     //adds the player who calls this method to the game.
     function addCurrentPlayer() {

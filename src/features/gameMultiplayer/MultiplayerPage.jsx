@@ -12,7 +12,7 @@
 import {Fragment, useEffect, useState} from "react";
 import {HubConnectionBuilder} from "@microsoft/signalr";
 import {useDispatch, useSelector} from "react-redux";
-import {setGameGUID, setGameName, setGameSize} from "./multiPlayerGameSlice.js";
+import {setGameGUID, setGameName, setGameSize, setWordsTheme} from "./multiPlayerGameSlice.js";
 import Lobby from "./Lobby.jsx";
 import JoinGameList from "./JoinGameList.jsx";
 
@@ -30,10 +30,12 @@ export default function MultiplayerPage() {
     dispatch(setGameGUID(useSelector(state => state.gameOptions.gameGuid)));
     dispatch(setGameName(useSelector(state => state.gameOptions.gameName)));
     dispatch(setGameSize(useSelector(state => state.gameOptions.puzzleSize)));
+    dispatch(setWordsTheme(useSelector(state => state.gameOptions.wordsCategory)));
 
     const gameGUID = useSelector(state => state.multiPlayerGame.gameGUID);
     const gameName = useSelector(state => state.multiPlayerGame.gameName);
     const gameSize = useSelector(state => state.multiPlayerGame.gameSize);
+    const theme = useSelector(state => state.multiPlayerGame.gameTheme);
 
     const [connection] = useState(new HubConnectionBuilder()
         .withUrl("https://localhost:7033/Game")
@@ -64,7 +66,7 @@ export default function MultiplayerPage() {
         //if its a new lobby add the lobby to the server
         if(lobbyState === "newLobby") {
             //create a game
-            connection.invoke("CreateNewGame", gameGUID, gameName, gameSize).then(r => console.log(r));
+            connection.invoke("CreateNewGame", gameGUID, gameName, gameSize, theme).then(r => console.log(r));
         }
         return (
             <Fragment>
