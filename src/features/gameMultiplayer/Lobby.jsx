@@ -5,30 +5,20 @@ export default function Lobby(props) {
 
     const gameGUID = useSelector(state => state.multiPlayerGame.gameGUID);
     const gameName = useSelector(state => state.multiPlayerGame.gameName);
-    const [playersElementsList, setPlayersElementsList] = useState();
+    const [playersList, setPlayersList] = useState([]);
 
     function getPlayersList() {
-        // eslint-disable-next-line react/prop-types
         props.connection.invoke("GetPlayersAsList", gameGUID).then(r => {
-            console.log(r);
-            const playersElements = () => {
-                const players = r.map((player) =>
-                    <div key={player.colour}>{player.colour}</div>
-                )
-                return <div>{players}</div>
-            }
-            //console.log(playersElements())
-            console.log(playersElements);
-            setPlayersElementsList(playersElements());
+            setPlayersList(r);
         })
     }
 
-    props.connection.on("", () => {
-        UpdateNumPagesAndGames();
+    props.connection.on("UpdateGamePlayers", () => {
+        getPlayersList();
     })
 
     //adds the player who calls this method to the game.
-    function addCurrentPlayer() {
+    async function addCurrentPlayer() {
         // eslint-disable-next-line react/prop-types
         props.connection.invoke("AddPlayerToGame", gameGUID).then()
         // eslint-disable-next-line react/prop-types
@@ -38,8 +28,13 @@ export default function Lobby(props) {
     }
 
     useEffect(() => {
-        addCurrentPlayer();
-        getPlayersList();
+        console.log("about to add playuer")
+        addCurrentPlayer().then(
+            () => {
+                getPlayersList();
+            }
+        )
+
     }, []);
 
     //addCurrentPlayer();
@@ -60,7 +55,8 @@ export default function Lobby(props) {
             <p>Game Name: {gameName}</p>
             <p>Game GUID: {gameGUID}</p>
             <p className="underline">Players</p>
-            {playersElementsList}
+            {playersList.map((player, index) =>
+                <div key={index}>{player.colour}</div>)}
             <button>Start</button>
         </div>
     )

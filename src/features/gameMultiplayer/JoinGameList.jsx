@@ -11,6 +11,10 @@ export default function JoinGameList(props) {
     const [maxPageNumber, setMaxPageNumber] = useState(1);
     const [isAddedToLobbyGroup, setIsAddedToLobbyGroup] = useState(false);
     const [gameList, setGameList] = useState([]);
+    //this stores the amount of players for each game in gameList.
+    //playerAmountList[i] has the player amounts for gameList[i].
+    //It's better than transporting all game info everytime the player count changes.
+    const [playerAmountList, setPlayerAmountList] = useState([]);
 
     const pageSize = 5;
 
@@ -22,7 +26,6 @@ export default function JoinGameList(props) {
     useEffect(() => {
         UpdateNumPagesAndGames();
     }, [pageNumber]);
-
 
     props.connection.on("NewGameAdded", () => {
         UpdateNumPagesAndGames();
@@ -95,8 +98,9 @@ export default function JoinGameList(props) {
                 {/*))}*/}
                 <div className="flex items-center flex-col">
                     {gameList.map((gameInfo, index) => (
-                        <GameInfoElement key={index} gameName={gameInfo.name} playerCount={0}
-                                         maxPlayerCount={gameInfo.maxNumberOfPlayers} theme={gameInfo.theme} size={gameInfo.size}
+                        <GameInfoElement key={index} gameName={gameInfo.name} playerCount={gameInfo.playerCount}
+                                         maxPlayerCount={gameInfo.maxNumberOfPlayers} theme={gameInfo.theme}
+                                         size={gameInfo.size} guid={gameInfo.guid} connection={props.connection}
                         />
                     ))}
                 </div>
