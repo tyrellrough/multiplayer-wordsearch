@@ -105,19 +105,6 @@ export default function JoinGameList(props) {
                     ))}
                 </div>
 
-
-
-    {/*            <p>{props.gameName}</p>*/}
-    {/*            <div>*/}
-    {/*                <p>{props.playerCount}/{props.maxPlayerCount}</p>*/}
-    {/*            </div>*/}
-    {/*        </div>*/}
-    {/*    <div>*/}
-    {/*        <p>Theme: {props.theme}</p>*/}
-    {/*        <p>Size: {props.size}</p>*/}
-    {/*    </div>*/}
-    {/*</div>*/}
-
                 
                 <div>
                     <button onClick={() => {

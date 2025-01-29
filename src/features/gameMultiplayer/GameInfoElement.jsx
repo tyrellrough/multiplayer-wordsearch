@@ -1,5 +1,12 @@
 import {useDispatch, useSelector} from "react-redux";
-import {setGameName, setGameGUID, setCurrentPageState, setLobbyState, setGameSize} from "./multiPlayerGameSlice.js";
+import {
+    setGameName,
+    setGameGUID,
+    setCurrentPageState,
+    setLobbyState,
+    setGameSize,
+    setWordsTheme
+} from "./multiPlayerGameSlice.js";
 
 export default function GameInfoElement(props) {
 
@@ -7,6 +14,8 @@ export default function GameInfoElement(props) {
     function joinGame() {
         dispatch(setGameName(props.gameName));
         dispatch(setGameGUID(props.guid));
+        dispatch(setGameSize(props.size));
+        dispatch(setWordsTheme(props.theme));
 
         dispatch(setLobbyState("existing"));
         dispatch(setCurrentPageState("lobby"));
@@ -28,9 +37,8 @@ export default function GameInfoElement(props) {
                 </div>
             </div>
             <button onClick={() => {
-                joinGame()
-            }}>Join
-            </button>
+                props.playerCount === props.maxPlayerCount ? "" : joinGame();
+            }}>{props.playerCount === props.maxPlayerCount ? "full" : "join"}</button>
         </div>
 
     )

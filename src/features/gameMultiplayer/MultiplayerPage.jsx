@@ -16,6 +16,8 @@ import {setGameGUID, setGameName, setGameSize, setWordsTheme} from "./multiPlaye
 import Lobby from "./Lobby.jsx";
 import JoinGameList from "./JoinGameList.jsx";
 import {setGameGuid} from "../gameOptions/gameOptionsSlice.js";
+import {useGetWordsByCategoryQuery} from "../../services/wordSearchAPI.js";
+import WordSP from "../gameBoard/WordSP.js";
 
 export default function MultiplayerPage() {
 
@@ -27,23 +29,13 @@ export default function MultiplayerPage() {
     const dispatch = useDispatch();
 
 
-    //these save the game guid and game name in the multiplayer slice.
-    // dispatch(setGameGUID(useSelector(state => state.gameOptions.gameGuid)));
-    // dispatch(setGameName(useSelector(state => state.gameOptions.gameName)));
-    // dispatch(setGameSize(useSelector(state => state.gameOptions.puzzleSize)));
-    // dispatch(setWordsTheme(useSelector(state => state.gameOptions.wordsCategory)));
-
-    // const gameGUID = useSelector(state => state.multiPlayerGame.gameGUID);
-    // const gameName = useSelector(state => state.multiPlayerGame.gameName);
-    // const gameSize = useSelector(state => state.multiPlayerGame.gameSize);
-    // const theme = useSelector(state => state.multiPlayerGame.gameTheme);
+    const maxNumWords = useSelector(state => state.gameOptions.maxNumberOfWords);
+    const maxWordLength = useSelector(state => state.gameOptions.maxNumberOfWords);
 
     const gameGUID = useSelector(state => state.gameOptions.gameGuid);
     const gameName = useSelector(state => state.gameOptions.gameName);
     const gameSize = useSelector(state => state.gameOptions.puzzleSize);
     const theme = useSelector(state => state.gameOptions.wordsCategory);
-
-
 
     const [connection] = useState(new HubConnectionBuilder()
         .withUrl("https://localhost:7033/Game")
@@ -77,8 +69,12 @@ export default function MultiplayerPage() {
         if(lobbyState === "newLobby") {
             dispatch(setGameName(gameName));
             dispatch(setGameGUID(gameGUID));
+            dispatch(setGameSize(gameSize));
+            dispatch(setWordsTheme(theme));
             //create a game
-            connection.invoke("CreateNewGame", gameGUID, gameName, gameSize, theme).then(r => console.log(r));
+            connection.invoke("CreateNewGame", gameGUID, gameName, gameSize, theme).then(
+                () => {}
+            );
         }
         return (
             <Fragment>
