@@ -24,5 +24,37 @@ class Colours {
             this.currentColourIndex ++;
         }
     }
+
+    convertColourNameToRGBA(colourName) {
+        switch (colourName) {
+            case "green":
+                return this.GREEN;
+                break;
+            case "yellow":
+                return this.YELLOW;
+                break;
+            case "red":
+                return this.RED;
+                break;
+            case "orange":
+                return this.ORANGE;
+                break;
+            case "purple":
+                return this.PURPLE;
+                break;
+            case "darkBlue":
+                return this.DARK_BLUE;
+                break;
+            case "pink":
+                return this.PINK;
+                break;
+            case "blue":
+                return this.DARK_BLUE;
+                break;
+            default:
+                return this.BLUE;
+                break;
+        }
+    }
 }
 export default Colours;

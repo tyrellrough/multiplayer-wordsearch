@@ -198,9 +198,6 @@ class WSBoard {
         let cellYPos = cellPos2D[0];
         let cellXPos = cellPos2D[1];
 
-
-
-
         //corners
         switch(cellNumber) {
             case this.topLeftCellIndex:

@@ -1,6 +1,6 @@
 import {Fragment, useEffect, useState} from "react";
 import ColouredSquare from "./ColouredSquare.jsx";
-import GameInfoElement from "./GameInfoElement.jsx";
+
 
 export default function ColourChanger(props) {
     const [availableColours, setAvailableColours] = useState([]);
@@ -9,6 +9,7 @@ export default function ColourChanger(props) {
     async function GetAvailableColours() {
         props.connection.invoke("GetAvailableColours", props.gameGuid).then(
             (availableColours) => {
+                availableColours.unshift("Change Colour")
                 setAvailableColours(availableColours);
                 console.log(availableColours);
             }
@@ -20,13 +21,15 @@ export default function ColourChanger(props) {
     }, [])
 
     function changeColour(e) {
-        setNewColour(e.target.value);
-        console.log(e.target.value);
-        props.connection.invoke("UpdatePlayerColour", e.target.value, props.gameGuid).then(() => {
-                GetAvailableColours().then();
+        if(e.target.value !== "Change Colour") {
+            setNewColour(e.target.value);
+            console.log(e.target.value);
+            props.connection.invoke("UpdatePlayerColour", e.target.value, props.gameGuid).then(() => {
+                    GetAvailableColours().then();
+                }
+            );
         }
 
-        );
     }
 
     return(
@@ -39,7 +42,6 @@ export default function ColourChanger(props) {
                     <option key={index} value={colour}>{colour}</option>
                 ))}
             </select>
-            <ColouredSquare colour={"bg-wordSearch-pink"}/>
         </Fragment>
     )
 

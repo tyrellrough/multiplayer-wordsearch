@@ -10,6 +10,7 @@ export const multiPlayerGameSlice = createSlice({
         currentPageState: "",
         lobbyState: "",
         connectionState: "",
+        currentPlayerColour: "",
     },
     reducers: {
         setCurrentPageState: (state, action) => {
@@ -29,11 +30,14 @@ export const multiPlayerGameSlice = createSlice({
         },
         setWordsTheme: (state, action) => {
             state.gameTheme = action.payload;
+        },
+        setCurrentPlayerColour: (state, action) => {
+            state.currentPlayerColour = action.payload;
         }
     }
 })
 
 export const {setCurrentPageState, setGameName,
     setGameGUID, setLobbyState,
-    setGameSize, setWordsTheme} = multiPlayerGameSlice.actions;
+    setGameSize, setWordsTheme, setCurrentPlayerColour} = multiPlayerGameSlice.actions;
 export default multiPlayerGameSlice.reducer;

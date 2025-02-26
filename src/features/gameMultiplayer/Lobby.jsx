@@ -1,7 +1,12 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import ColourChanger from "./ColourChanger.jsx";
 import PlayerNameChanger from "./PlayerNameChanger.jsx";
+import ColouredSquare from "./ColouredSquare.jsx";
+import PlayerInfo from "./PlayerInfo.jsx";
+import StartGameButton from "./StartGameButton.jsx";
+import {setCurrentPageState, setCurrentPlayerColour} from "./multiPlayerGameSlice.js";
+import Colours from "../gameBoard/Colours.js";
 
 export default function Lobby(props) {
 
@@ -9,6 +14,8 @@ export default function Lobby(props) {
     const gameName = useSelector(state => state.multiPlayerGame.gameName);
     const theme = useSelector(state => state.multiPlayerGame.gameTheme);
     const size = useSelector(state => state.multiPlayerGame.gameSize);
+    const dispatch = useDispatch();
+    const colours = new Colours();
 
     const [playersList, setPlayersList] = useState([]);
     const [currentPlayer, setCurrentPlayer] = useState({});
@@ -30,6 +37,7 @@ export default function Lobby(props) {
         props.connection.invoke("AddPlayerToGame", gameGUID).then(
             (newPlayer) => {
                 console.log("new player" + newPlayer.name, newPlayer.playerID, newPlayer.colour);
+                dispatch(setCurrentPlayerColour(colours.convertColourNameToRGBA(newPlayer.colour)));
                 setCurrentPlayer(newPlayer);
             }
         )
@@ -39,6 +47,11 @@ export default function Lobby(props) {
         props.connection.invoke("RemoveUserFromGroup", "lobby").then()
     }
 
+    props.connection.on("StartGame", () => {
+        dispatch(setCurrentPageState("game"))
+    })
+
+
     useEffect(() => {
         console.log("about to add playuer")
         addCurrentPlayer().then(
@@ -46,13 +59,7 @@ export default function Lobby(props) {
                 getPlayersList();
             }
         )
-
     }, []);
-
-    //addCurrentPlayer();
-    //could be concurrency issues here. Let's just ignore for now.
-    //getPlayersList();
-
 
     return (
         <div>
@@ -72,18 +79,15 @@ export default function Lobby(props) {
                 <div>
                     {playersList.map((player, index) =>
                         <div key={index} className="flex justify-center gap-4">
-                            {currentPlayer.playerID === player.playerID ? <PlayerNameChanger />: <p>{player.name}</p>}
-                            <p className="w-40">{player.colour}</p>
-                            {currentPlayer.playerID === player.playerID ? <ColourChanger connection={props.connection}
-                                                                                         gameGuid={gameGUID}
-                                                                                         currentColour={currentPlayer.colour}
-                                                                                         currentPlayer={currentPlayer} />: <div className="w-40"></div>}
+                            <PlayerInfo currentPlayer={currentPlayer} connection={props.connection}
+                                        gameGUID = {gameGUID} player={player}
+                            />
                         </div>
                     )}
                 </div>
             </div>
 
-            <button>Start</button>
+            <StartGameButton connection={props.connection} />
         </div>
     )
 }

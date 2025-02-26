@@ -8,10 +8,11 @@ export default function CreateGameButton() {
     const dispatch = useDispatch()
 
     const clickHandler = () => {
-
+        console.log("creating new game BUTTON CLICK HANDLER")
         dispatch(setCurrentPageState("lobby"))
         dispatch(setLobbyState("newLobby"))
         dispatch(changePage("multiplayer"))
+
     }
 
     return (
