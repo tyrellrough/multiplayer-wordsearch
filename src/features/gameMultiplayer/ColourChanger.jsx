@@ -1,10 +1,16 @@
 import {Fragment, useEffect, useState} from "react";
 import ColouredSquare from "./ColouredSquare.jsx";
+import {setCurrentPlayerColour} from "./multiPlayerGameSlice.js";
+import {useDispatch} from "react-redux";
+import colours from "../gameBoard/Colours.js";
+import Colours from "../gameBoard/Colours.js";
 
 
 export default function ColourChanger(props) {
     const [availableColours, setAvailableColours] = useState([]);
     const [newColour, setNewColour] = useState("");
+    const dispatch = useDispatch();
+    const colours = new Colours();
 
     async function GetAvailableColours() {
         props.connection.invoke("GetAvailableColours", props.gameGuid).then(
@@ -16,6 +22,10 @@ export default function ColourChanger(props) {
         )
     }
 
+    props.connection.on("UpdateAvailableColours", () => {
+        GetAvailableColours().then();
+    })
+
     useEffect(() => {
         GetAvailableColours().then()
     }, [])
@@ -23,6 +33,9 @@ export default function ColourChanger(props) {
     function changeColour(e) {
         if(e.target.value !== "Change Colour") {
             setNewColour(e.target.value);
+
+            const colourARGB = colours.convertColourNameToRGBA(e.target.value);
+            dispatch(setCurrentPlayerColour(colourARGB));
             console.log(e.target.value);
             props.connection.invoke("UpdatePlayerColour", e.target.value, props.gameGuid).then(() => {
                     GetAvailableColours().then();

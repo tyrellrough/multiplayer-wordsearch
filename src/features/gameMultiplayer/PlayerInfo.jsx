@@ -37,7 +37,6 @@ export default function PlayerInfo(props) {
             break;
     }
 
-
     return (
         <Fragment>
             {props.currentPlayer.playerID === props.player.playerID ? <PlayerNameChanger connection={props.connection}

@@ -51,7 +51,6 @@ export default function Lobby(props) {
         dispatch(setCurrentPageState("game"))
     })
 
-
     useEffect(() => {
         console.log("about to add playuer")
         addCurrentPlayer().then(

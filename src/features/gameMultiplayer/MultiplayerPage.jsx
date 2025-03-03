@@ -41,6 +41,7 @@ export default function MultiplayerPage() {
         .build())
 
 
+
     //const [IsGameGenerated, setIsGameGenerated] = useState(false);
 
     useEffect(() => {
@@ -79,7 +80,7 @@ export default function MultiplayerPage() {
         }
             return (
                 <Fragment>
-                    <Lobby connection={connection} />
+                    <Lobby connection={connection} lobbyState={lobbyState} />
                 </Fragment>
             )
 
@@ -91,6 +92,7 @@ export default function MultiplayerPage() {
                 <GameContainerMultiplayer connection={connection} />
             </div>
         )
+    } else if(pageState === "endGame") {
 
     }
 }

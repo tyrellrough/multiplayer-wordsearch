@@ -22,15 +22,15 @@ class WSRendererMultiplayer {
         return this.#boardCellHeight;
     }
 
-    drawSelection(selection, cellArray, colours) {
+    drawSelection(selection, cellArray, colour) {
         const startIndex2D = selection.startIndex2D;
         const endIndex2D = selection.endIndex2D;
 
         this.drawBoard(cellArray);
         //console.log(`startindex2d ${startIndex2D} endindex2d ${endIndex2D}`);
         //highlight start cell circle
-        this.highlightCell(selection.startIndex, colours);
-        this.highlightCell(selection.endIndex, colours);
+        this.highlightCell(selection.startIndex, colour);
+        this.highlightCell(selection.endIndex, colour);
         //highlight end cell circle
 
 
@@ -115,7 +115,7 @@ class WSRendererMultiplayer {
 
     }
 
-    highlightCell(cellNumber1D, colours) {
+    highlightCell(cellNumber1D, colour) {
         const index2D = ArrayHelperFunctions.convert1DIndexTo2D(cellNumber1D, this.#numBoardRows, this.#numBoardRows);
         const cellYStart = index2D[0] * this.#boardCellHeight;
         const cellXStart = index2D[1] * this.#boardCellHeight;
@@ -126,7 +126,7 @@ class WSRendererMultiplayer {
         this.#canvas.getContext('2d').arc(cellXCenter, cellYCenter, 0.5 * this.#boardCellHeight, 0, 2 * Math.PI);
 
         //get cell colour
-        this.#canvas.getContext('2d').fillStyle = `rgba(4, 139, 194, 0.7)`;
+        this.#canvas.getContext('2d').fillStyle = colour;
         this.#canvas.getContext('2d').fill();
     }
 

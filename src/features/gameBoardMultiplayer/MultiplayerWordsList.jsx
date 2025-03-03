@@ -1,11 +1,14 @@
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import WordListElementMultiplayer from "../gameBoardMultiplayer/WordListElementMultiplayer.jsx";
+import WordListElementMultiplayer from "./WordListElementMultiplayer.jsx";
+import ColourChanger from "../gameMultiplayer/ColourChanger.jsx";
+import Colours from "../gameBoard/Colours.js";
 
 export default function MultiplayerWordsList(props) {
 
     const gameGUID = useSelector(state => state.multiPlayerGame.gameGUID);
     const [words, setWords] = useState([]);
+
 
     function getWords() {
         props.connection.invoke("GetGameWords", gameGUID).then(wordsResult => {

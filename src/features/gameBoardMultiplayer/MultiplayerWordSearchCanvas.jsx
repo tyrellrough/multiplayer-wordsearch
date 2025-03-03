@@ -2,7 +2,7 @@ import {useEffect, useRef} from "react";
 
 import ArrayHelperFunctions from "../gameBoard/ArrayHelperFunctions.js";
 import {useSelector} from "react-redux";
-import WSRendererMultiplayer from "../gameBoardMultiplayer/WSRendererMultiplayer.js";
+import WSRendererMultiplayer from "./WSRendererMultiplayer.js";
 import Selection from "../gameBoard/Selection.js";
 import CardinalDirections from "../gameBoard/CardinalDirections.js";
 
@@ -13,6 +13,7 @@ export default function MultiplayerWordSearchCanvas(props) {
     const selectionRef = useRef(null);
     const boardRef = useRef(null);
     const currentPlayerColour = useSelector(state => state.multiPlayerGame.currentPlayerColour);
+    console.log("currentPlayercolour in wscanvas " + currentPlayerColour);
 
     let clickX = 0;
     let clickY = 0;
@@ -124,10 +125,6 @@ export default function MultiplayerWordSearchCanvas(props) {
         selectionRef.current.initaliseStartCellPos(renderRef.current.getBoardCellHeight());
         canvasRef.current.addEventListener('mousemove', handleCanvasMouseDownMove);
         console.log("mouse down")
-
-
-
-
     }
 
     function handleCanvasMouseDownMove(e) {
@@ -155,7 +152,7 @@ export default function MultiplayerWordSearchCanvas(props) {
             selectionRef.current.endIndex2D = currentCell2D;
             selectionRef.current.calcEndCellMiddlePos(renderRef.current.getBoardCellHeight());
 
-            renderRef.current.drawSelection(selectionRef.current, boardRef.current.cells, null);
+            renderRef.current.drawSelection(selectionRef.current, boardRef.current.cells, currentPlayerColour);
         }
         //console.log(selectionRef.current)
     }

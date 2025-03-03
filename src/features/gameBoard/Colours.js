@@ -49,10 +49,42 @@ class Colours {
                 return this.PINK;
                 break;
             case "blue":
-                return this.DARK_BLUE;
+                return this.BLUE;
                 break;
             default:
                 return this.BLUE;
+                break;
+        }
+    }
+
+    convertColourARGBToHex(colourARGB) {
+        switch (colourARGB) {
+            case "rgba(3, 250, 3, 0.7)":
+                return '#03FA03B2';
+                break;
+            case "rgba(244,245,1,0.7)":
+                return '#F4F501B2';
+                break;
+            case "rgba(246,6,7,0.7)":
+                return '#F60607B2';
+                break;
+            case "rgba(238, 90, 6, 0.7)":
+                return '#EE5A06B2';
+                break;
+            case "rgba(121, 3, 241, 0.7)":
+                return '#7903F1B2';
+                break;
+            case "rgba(2, 3, 237, 0.7)":
+                return '#0203EDB2';
+                break;
+            case "rgba(243, 58, 106, 0.7)":
+                return '#F33A6AB2';
+                break;
+            case "rgba(4, 139, 194, 0.7)":
+                return '#048BC2B2';
+                break;
+            default:
+                return '#048BC2B2';
                 break;
         }
     }
