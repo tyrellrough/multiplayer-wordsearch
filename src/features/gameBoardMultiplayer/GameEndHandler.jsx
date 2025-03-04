@@ -3,38 +3,43 @@ import {setCurrentPageState, setLobbyState} from "../gameMultiplayer/multiPlayer
 
 export default function GameEndHandler(props) {
     const gameGuid = useSelector(state => state.multiPlayerGame.gameGUID)
+    const wordTheme = useSelector(state => state.multiPlayerGame.gameTheme)
+    const gameSize = useSelector(state => state.multiPlayerGame.gameSize)
+
+    const currentPlayer = useSelector(state => state.multiPlayerGame.currentPlayer)
+
     const dispatch = useDispatch();
 
 
     function EndGameHandler() {
-
+        props.connection.invoke("EndGame", gameGuid).then();
     }
 
     function ReturnLobbyHandler() {
-        props.connection.invoke("DeleteGame", gameGuid).then(() =>
-            props.connection.invoke("ChangePageStateToLobby", gameGuid).then()
-        )
-    }
+            props.connection.invoke("GenerateNewBoard", gameGuid, wordTheme, gameSize).then(() => {
+                props.connection.invoke("ChangePageStateToExistingLobby", gameGuid).then()
 
-    function NewGameHandler() {
+            })
 
     }
 
-    props.connection.on("ChangeStateToLobby", () => {
+    props.connection.on("ChangeStateToExistingLobby", () => {
+        dispatch(setLobbyState("existingLobby"))
         dispatch(setCurrentPageState("lobby"))
-        dispatch(setLobbyState("newLobby"))
+
     })
 
-    // const pageState = useSelector(state => state.multiPlayerGame.currentPageState);
-    // const lobbyState = useSelector(state => state.multiPlayerGame.lobbyState);
 
-    return (
-        <div>
-            <button onClick={() => EndGameHandler()}>End Game</button>
-            <button onClick={() => ReturnLobbyHandler()}>Return To Lobby</button>
-            <button onClick={() => NewGameHandler()}>New Game</button>
-        </div>
-    );
+    if(currentPlayer.isHost) {
+        return (
+            <div>
+                <button onClick={() => EndGameHandler()}>End Game</button>
+                <button onClick={() => ReturnLobbyHandler()}>New Game</button>
+            </div>
+        );
+    }
+
+
 
 
 }

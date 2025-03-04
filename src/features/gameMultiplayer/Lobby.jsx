@@ -5,20 +5,26 @@ import PlayerNameChanger from "./PlayerNameChanger.jsx";
 import ColouredSquare from "./ColouredSquare.jsx";
 import PlayerInfo from "./PlayerInfo.jsx";
 import StartGameButton from "./StartGameButton.jsx";
-import {setCurrentPageState, setCurrentPlayerColour} from "./multiPlayerGameSlice.js";
+import {
+    setCurrentPageState, setCurrentPlayer,
+    setCurrentPlayerColour, setIsHost,
+
+} from "./multiPlayerGameSlice.js";
 import Colours from "../gameBoard/Colours.js";
 
 export default function Lobby(props) {
 
+    const lobbyState = useSelector(state => state.multiPlayerGame.lobbyState);
     const gameGUID = useSelector(state => state.multiPlayerGame.gameGUID);
     const gameName = useSelector(state => state.multiPlayerGame.gameName);
-    const theme = useSelector(state => state.multiPlayerGame.gameTheme);
     const size = useSelector(state => state.multiPlayerGame.gameSize);
+    const theme = useSelector(state => state.multiPlayerGame.gameTheme);
+
     const dispatch = useDispatch();
     const colours = new Colours();
 
     const [playersList, setPlayersList] = useState([]);
-    const [currentPlayer, setCurrentPlayer] = useState({});
+    //const [currentPlayer, setCurrentPlayer] = useState({});
 
     function getPlayersList() {
         props.connection.invoke("GetPlayersAsList", gameGUID).then(r => {
@@ -31,14 +37,18 @@ export default function Lobby(props) {
         getPlayersList();
     })
 
+    props.connection.on("UpdateCurrentPlayer", () => {
+        getCurrentPlayer();
+    })
+
     //adds the player who calls this method to the game.
-    async function addCurrentPlayer() {
+    async function addCurrentPlayer(isHost) {
         // eslint-disable-next-line react/prop-types
-        props.connection.invoke("AddPlayerToGame", gameGUID).then(
+        props.connection.invoke("AddPlayerToGame", gameGUID, isHost).then(
             (newPlayer) => {
                 console.log("new player" + newPlayer.name, newPlayer.playerID, newPlayer.colour);
                 dispatch(setCurrentPlayerColour(colours.convertColourNameToRGBA(newPlayer.colour)));
-                setCurrentPlayer(newPlayer);
+                dispatch(setCurrentPlayer(newPlayer));
             }
         )
         // eslint-disable-next-line react/prop-types
@@ -51,14 +61,38 @@ export default function Lobby(props) {
         dispatch(setCurrentPageState("game"))
     })
 
+    function getCurrentPlayer() {
+        props.connection.invoke("GetCurrentPlayer", gameGUID).then(player => {
+            console.log("currentplayer", player)
+            dispatch(setCurrentPlayer(player));
+        })
+    }
+
     useEffect(() => {
-        console.log("about to add playuer")
-        addCurrentPlayer().then(
+        if(lobbyState === "newLobby") {
+            dispatch(setIsHost(true));
+            props.connection.invoke("CreateNewGame", gameGUID, gameName, size, theme).then(
+                () => {
+                    AddPlayerAndGetPlayers(true);
+                }
+            );
+        } else if(lobbyState === "existingLobby") {
+            getPlayersList();
+            getCurrentPlayer();
+        }
+        else {
+            AddPlayerAndGetPlayers(false);
+        }
+    }, []);
+
+    function AddPlayerAndGetPlayers(isHost) {
+        addCurrentPlayer(isHost).then(
             () => {
                 getPlayersList();
             }
         )
-    }, []);
+    }
+
 
     return (
         <div>
@@ -78,7 +112,7 @@ export default function Lobby(props) {
                 <div>
                     {playersList.map((player, index) =>
                         <div key={index} className="flex justify-center gap-4">
-                            <PlayerInfo currentPlayer={currentPlayer} connection={props.connection}
+                            <PlayerInfo connection={props.connection}
                                         gameGUID = {gameGUID} player={player}
                             />
                         </div>

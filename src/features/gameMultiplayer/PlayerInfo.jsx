@@ -2,8 +2,11 @@ import PlayerNameChanger from "./PlayerNameChanger.jsx";
 import ColouredSquare from "./ColouredSquare.jsx";
 import ColourChanger from "./ColourChanger.jsx";
 import {Fragment, useEffect, useState} from "react";
+import {useSelector} from "react-redux";
 
 export default function PlayerInfo(props) {
+
+    const currentPlayer = useSelector(state =>  state.multiPlayerGame.currentPlayer);
 
     let bg;
     //const bg = "bg-wordSearch-green";
@@ -39,7 +42,7 @@ export default function PlayerInfo(props) {
 
     return (
         <Fragment>
-            {props.currentPlayer.playerID === props.player.playerID ? <PlayerNameChanger connection={props.connection}
+            {currentPlayer.playerID === props.player.playerID ? <PlayerNameChanger connection={props.connection}
                                                                                          playerName={props.player.name}
                                                                                          gameGuid={props.gameGUID}/> :
                 <p>{props.player.name}</p>}
@@ -47,10 +50,10 @@ export default function PlayerInfo(props) {
                 <p>{props.player.colour}</p>
                 <ColouredSquare colour={bg}/>
             </div>
-            {props.currentPlayer.playerID === props.player.playerID ? <ColourChanger connection={props.connection}
+            {currentPlayer.playerID === props.player.playerID ? <ColourChanger connection={props.connection}
                                                                                      gameGuid={props.gameGUID}
-                                                                                     currentColour={props.currentPlayer.colour}
-                                                                                     currentPlayer={props.currentPlayer}/> :
+                                                                                     currentColour={currentPlayer.colour}
+                                                                                    /> :
                 <div className="w-40"></div>}
         </Fragment>
     )

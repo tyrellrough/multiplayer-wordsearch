@@ -15,17 +15,19 @@ import {useDispatch, useSelector} from "react-redux";
 import {setGameGUID, setGameName, setGameSize, setWordsTheme} from "./multiPlayerGameSlice.js";
 import Lobby from "./Lobby.jsx";
 import JoinGameList from "./JoinGameList.jsx";
-import {setGameGuid} from "../gameOptions/gameOptionsSlice.js";
-import {useGetWordsByCategoryQuery} from "../../services/wordSearchAPI.js";
-import WordSP from "../gameBoard/WordSP.js";
 import GameContainerMultiplayer from "./GameContainerMultiplayer.jsx";
+import {changePage} from "../pageSwitcher/pageSwitcherSlice.js";
+import NavigationBar from "../pageSwitcher/NavigationBar.jsx";
+import BackButton from "../pageSwitcher/BackButton.jsx";
+import NavigationBarInGame from "./NavigationBarInGame.jsx";
+import MultiplayerGameOptionsSelector from "../gameOptions/MultiplayerGameOptionsSelector.jsx";
+import CreateGameButton from "./CreateGameButton.jsx";
 
 export default function MultiplayerPage() {
 
 
-
-    const pageState = useSelector(state => state.multiPlayerGame.currentPageState);
     const lobbyState = useSelector(state => state.multiPlayerGame.lobbyState);
+    const pageState = useSelector(state => state.multiPlayerGame.currentPageState);
 
     //const connectionState = useSelector(state => state.multiPlayerGame.connectionState);
     const [connectionState, setConnectionState] = useState("unconnected");
@@ -40,9 +42,9 @@ export default function MultiplayerPage() {
         .withUrl("https://localhost:7033/Game")
         .build())
 
-
-
-    //const [IsGameGenerated, setIsGameGenerated] = useState(false);
+    connection.on("SwitchPageStateToStart", () => {
+        dispatch(changePage("mainMenu"));
+    })
 
     useEffect(() => {
         if(connectionState === "unconnected") {
@@ -51,36 +53,46 @@ export default function MultiplayerPage() {
     }, [connection, connectionState])
 
     if(connectionState !== "connected") {
-        return(
+        return (
             <div>
                 <p>Waiting for connection to establish</p>
             </div>
         )
+
+    } else if(pageState === "newGameCreator") {
+        return(
+            <div>
+                <NavigationBar/>
+                <MultiplayerGameOptionsSelector connection={connection} />
+                <CreateGameButton />
+            </div>
+
+        );
     } else if(pageState === "gamesList") {
         return(
-            <Fragment>
+            <div>
+                <NavigationBar/>
+                <BackButton />
                 <JoinGameList connection={connection}/>
-            </Fragment>
+            </div>
         )
     } else if(pageState === "lobby") {
         console.log("page state is lobby")
         //add user to group named the guid
         //connection.invoke("RemoveFromGroup", "lobby").then()
 
-        //if its a new lobby add the lobby to the server
         if(lobbyState === "newLobby") {
             console.log("lobby state is new lobby")
             dispatch(setGameName(gameName));
             dispatch(setGameGUID(gameGUID));
             dispatch(setGameSize(gameSize));
             dispatch(setWordsTheme(theme));
-            //create a game
-            console.log("CREATING A GAME")
-            connection.invoke("CreateNewGame", gameGUID, gameName, gameSize, theme).then();
         }
+
             return (
                 <Fragment>
-                    <Lobby connection={connection} lobbyState={lobbyState} />
+                    <NavigationBarInGame connection={connection}/>
+                    <Lobby connection={connection} />
                 </Fragment>
             )
 
@@ -89,10 +101,9 @@ export default function MultiplayerPage() {
     } else if(pageState === "game") {
         return (
             <div>
+                <NavigationBarInGame connection={connection} />
                 <GameContainerMultiplayer connection={connection} />
             </div>
         )
-    } else if(pageState === "endGame") {
-
     }
 }

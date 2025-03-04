@@ -1,29 +1,28 @@
-import {useGetNewGameGuidQuery} from "../../services/wordSearchAPI.js";
-import {Fragment} from "react";
+
+import {Fragment, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setGameGuid} from "./gameOptionsSlice.js";
 
-export default function GameGuid() {
-    const {data: gameGuidData = [], error, isLoading}  = useGetNewGameGuidQuery(undefined, undefined);
+export default function GameGuid(props) {
+
     const dispatch = useDispatch();
-    const gameGuid = useSelector(state => state.gameOptions.gameGuid);
+    const gameGuid = useSelector((state) => state.gameOptions.gameGuid);
 
-    if (error) {
-        return(
-            <p>error</p>
-        )
-    }
-    if (isLoading) {
-        return(
-            <p>loading</p>
-        )
+    function GetNewGameGuid() {
+        props.connection.invoke("GetNewGuid").then((guid) => {
+            dispatch(setGameGuid(guid));
+        })
     }
 
-    dispatch(setGameGuid(gameGuidData));
+    useEffect(() => {
+        GetNewGameGuid();
+    }, []);
+
+
 
     return (
         <Fragment>
-            <p>{gameGuidData}</p>
+            <p>{gameGuid}</p>
         </Fragment>
     );
 }

@@ -11,11 +11,11 @@ function App() {
 
     const currentPage = useSelector((state) => state.pageSwitcher.currentPage);
 
-    if(currentPage === "mainMenu") {
+    if (currentPage === "mainMenu") {
         return (
             <div className="h-screen">
-                <NavigationBar />
-                <MainMenuPage />
+                <NavigationBar/>
+                <MainMenuPage/>
             </div>
 
         )
@@ -30,18 +30,18 @@ function App() {
     } else if (currentPage === "singlePlayerGame") {
         return (
             <div className="h-screen">
-                <NavigationBar />
-                <GameContainerSinglePlayer />
+                <NavigationBar/>
+                <GameContainerSinglePlayer/>
             </div>
 
         )
-    } else if (currentPage === "newMultiplayer") {
-        return (
-            <CreateMultiplayerPage />
-        )
     } else if (currentPage === "multiplayer") {
         return (
-            <MultiplayerPage />
+
+            <div className="h-screen">
+
+                <MultiplayerPage/>
+            </div>
         )
     }
 

@@ -1,5 +1,6 @@
 import NavigationButton from "./NavigationButton.jsx";
 import LoadGameListButton from "../gameMultiplayer/LoadGameListButton.jsx";
+import NewMultiplayerButton from "../gameMultiplayer/NewMultiplayerButton.jsx";
 
 
 export default function MainMenuPage() {
@@ -13,8 +14,7 @@ export default function MainMenuPage() {
                 <p className="text-3xl">Tyrell's Word Search Puzzles</p>
                 <div className="flex flex-col m-auto text-2xl gap-3">
                     <NavigationButton text={'Singleplayer'} targetPage={'newSinglePlayer'}/>
-                    <NavigationButton text={'New Multiplayer'} targetPage={'newMultiplayer'}/>
-                    <NavigationButton text={'Join Multiplayer'} targetPage={'joinMultiplayer'}/>
+                    <NewMultiplayerButton />
                     <LoadGameListButton />
                 </div>
             </div>

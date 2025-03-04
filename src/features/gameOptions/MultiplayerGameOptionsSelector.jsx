@@ -4,7 +4,7 @@ import WordThemeDropDown from "./WordThemeDropDown.jsx";
 import GameName from "./GameName.jsx";
 import GameGuid from "./GameGuid.jsx";
 
-export default function MultiplayerGameOptionsSelector() {
+export default function MultiplayerGameOptionsSelector(props) {
 
     return(
         <div className="flex flex-col items-center gap-1 pb-4">
@@ -14,8 +14,8 @@ export default function MultiplayerGameOptionsSelector() {
             <p className="underline text-2xl">Word Theme</p>
             <WordThemeDropDown/>
             <p className="underline text-2xl">Game Name</p>
-            <GameName/>
-            <GameGuid />
+            <GameName connection={props.connection} />
+            <GameGuid connection={props.connection} />
 
         </div>
     );
