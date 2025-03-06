@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {backPage, changePage} from "./pageSwitcherSlice.js";
 
-export default function HomeButton() {
+export default function BackButton() {
 
     const dispatch = useDispatch()
 

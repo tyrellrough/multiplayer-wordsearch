@@ -196,6 +196,8 @@ export default function WordSearchCanvas(props) {
                     } else {
                         wsBoardRef.current.highlightCellsInRange(wordLocation.wordStartIndex, wordLocation.wordEndIndex,  wsBoardRef.current.selection.direction, colourRef.current);
                     }
+
+
                 }
             }
 

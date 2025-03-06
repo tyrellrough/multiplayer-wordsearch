@@ -10,7 +10,7 @@
 // This component contains the lobby,
 // the game itself, lobby list and the signalR connection to the server.
 import {Fragment, useEffect, useState} from "react";
-import {HubConnectionBuilder} from "@microsoft/signalr";
+import {HubConnectionBuilder, HubConnectionState} from "@microsoft/signalr";
 import {useDispatch, useSelector} from "react-redux";
 import {setGameGUID, setGameName, setGameSize, setWordsTheme} from "./multiPlayerGameSlice.js";
 import Lobby from "./Lobby.jsx";
@@ -22,6 +22,7 @@ import BackButton from "../pageSwitcher/BackButton.jsx";
 import NavigationBarInGame from "./NavigationBarInGame.jsx";
 import MultiplayerGameOptionsSelector from "../gameOptions/MultiplayerGameOptionsSelector.jsx";
 import CreateGameButton from "./CreateGameButton.jsx";
+
 
 export default function MultiplayerPage() {
 
@@ -40,15 +41,47 @@ export default function MultiplayerPage() {
 
     const [connection] = useState(new HubConnectionBuilder()
         .withUrl("https://localhost:7033/Game")
+        .withAutomaticReconnect()
         .build())
+
+    connection.onclose(error => {
+        console.assert(connection.state === HubConnectionState.Disconnected);
+    });
 
     connection.on("SwitchPageStateToStart", () => {
         dispatch(changePage("mainMenu"));
     })
 
+    // var lockResolver;
+    // if (navigator && navigator.locks && navigator.locks.request) {
+    //     const promise = new Promise((res) => {
+    //         lockResolver = res;
+    //     });
+    //
+    //     navigator.locks.request('unique_lock_name', { mode: "shared" }, () => {
+    //         return promise;
+    //     });
+    // }
+
+    async function start() {
+        try {
+            await connection.start();
+            console.assert(connection.state === HubConnectionState.Connected);
+            console.log("SignalR Connected.");
+            setConnectionState("connected");
+        } catch (err) {
+            console.assert(connection.state === HubConnectionState.Disconnected);
+            console.log(err);
+            setTimeout(() => start(), 5000);
+        }
+    }
+
     useEffect(() => {
+        // if(connectionState === "unconnected") {
+        //     connection.start().then(() => setConnectionState("connected"))
+        // }
         if(connectionState === "unconnected") {
-            connection.start().then(() => setConnectionState("connected"))
+            start();
         }
     }, [connection, connectionState])
 
