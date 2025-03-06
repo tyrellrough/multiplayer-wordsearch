@@ -42,10 +42,19 @@ class CardinalDirections {
     }
 
     static convertDegreeToDirection(degree) {
-        const val = ((degree/45));
-        const dirArr = ["E", "SE", "S", "SW", "W", "NW", "N", "NE", "E"];
-        const index = Math.round((val % 8));
-        return dirArr[index];
+        // const val = ((degree/45));
+        // //console.log("floor val", Math.round(val));
+        // const dirArr = ["E", "SE", "S", "SW", "W", "NW", "N", "NE", "E"];
+        // const index = Math.floor(val);
+        //     //Math.round((val % 8));
+        // return dirArr[index];
+
+        console.log("cdd", Math.round((de)));
+    }
+
+    static getCardinalDirection(angle) {
+        const directions = ["E", "SE", "S", "SW", "W", "NW", "N", "NE"];
+        return directions[Math.round(angle / 45) % 8];
     }
 
     static calcDirectionFromPos(e, canvasRef, initialClickY, initialClickX) {
@@ -56,10 +65,17 @@ class CardinalDirections {
 
         const dX = x - initialClickX;
         const dY = y - initialClickY;
+       // console.log("dx " + dX + " dy " + dY);
+
 
 
         const angle = Math.atan2(dY, dX);
+        //console.log("angle", angle);
+
         const degree = this.radianToNormalDegrees(angle);
+        console.log("angle", degree);
+       // console.log("getcardinaldric" + this.getCardinalDirection(degree));
+        //console.log("degree " + degree);
         const dir = this.convertDegreeToDirection(degree);
 
         //console.log(`angle ${angle} degree ${degree} dir ${dir}`);

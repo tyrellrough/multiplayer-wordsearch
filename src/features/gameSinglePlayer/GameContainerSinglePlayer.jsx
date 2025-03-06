@@ -33,7 +33,7 @@ export default function GameContainerSinglePlayer() {
             //let tempList = [];
             data.forEach((word) => {
                 //tempList.push(new WordSP(word.text, false))
-                console.log("pushing new")
+                //console.log("pushing new")
                 setWordsList(wordsList => [...wordsList, new WordSP(word.text, false)]);
             })
             //setWordsList(tempList);
@@ -45,7 +45,7 @@ export default function GameContainerSinglePlayer() {
 
     useEffect(() => {
 
-        console.log("wordsList count", wordsList.length);
+        //console.log("wordsList count", wordsList.length);
         let wordsLeft = wordsList.length;
         wordsList.forEach(word => {
             if(word.isFound) {
@@ -59,7 +59,7 @@ export default function GameContainerSinglePlayer() {
         } else {
             setIsGameComplete(false);
         }
-        console.log("wordsLeft count", wordsLeft);
+       // console.log("wordsLeft count", wordsLeft);
 
     }, [wordsList]);
 
