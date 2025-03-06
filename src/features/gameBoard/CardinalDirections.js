@@ -40,14 +40,23 @@ class CardinalDirections {
     static radianToNormalDegrees(radians) {
         return (radians * (180/Math.PI) + 360) % 360;
     }
-
-    static convertDegreeToDirection(degree) {
-        const val = ((degree/45));
-        const dirArr = ["E", "SE", "S", "SW", "W", "NW", "N", "NE", "E"];
-        const index = Math.round((val % 8));
-        return dirArr[index];
+    //
+    // static convertDegreeToDirection(degree) {
+    //     // const val = ((degree/45));
+    //     // //console.log("floor val", Math.round(val));
+    //     // const dirArr = ["E", "SE", "S", "SW", "W", "NW", "N", "NE", "E"];
+    //     // const index = Math.floor(val);
+    //     //     //Math.round((val % 8));
+    //     // return dirArr[index];
+    //
+    //     console.log("cdd", (Math.floor(degree / 45)));
+    // }
+    //
+    static getCardinalDirection(angle) {
+        const directions = ["E", "SE", "S", "SW", "W", "NW", "N", "NE"];
+        return directions[Math.floor(angle / 45) % 8];
     }
-
+    //
     static calcDirectionFromPos(e, canvasRef, initialClickY, initialClickX) {
         const rect = canvasRef.current.getBoundingClientRect();
         //mouse current position.
@@ -56,14 +65,24 @@ class CardinalDirections {
 
         const dX = x - initialClickX;
         const dY = y - initialClickY;
+       // console.log("dx " + dX + " dy " + dY);
 
 
-        const angle = Math.atan2(dY, dX);
-        const degree = this.radianToNormalDegrees(angle);
-        const dir = this.convertDegreeToDirection(degree);
+
+        let angle = Math.atan2(dY, dX);
+        //console.log("angle", angle);
+
+        let degree = this.radianToNormalDegrees(angle);
+
+
+        //console.log("angle", degree);
+       // console.log("index ", Math.floor(degree/45));
+       console.log("getcardinaldric" + this.getCardinalDirection(degree));
+        //console.log("degree " + degree);
+       // const dir = this.convertDegreeToDirection(degree);
 
         //console.log(`angle ${angle} degree ${degree} dir ${dir}`);
-        return dir;
+        //return dir;
     }
 
     static calcTouchDirectionFromPos(e, canvasRef, initialTouchY, initialTouchX) {
