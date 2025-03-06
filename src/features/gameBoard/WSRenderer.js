@@ -60,7 +60,7 @@ class WSRenderer {
         } else if (window.innerHeight >= window.innerWidth) {
             //height is more than width
             this.#boardHeight = Math.floor((window.innerWidth - 150) * 0.85);
-           // console.log("height is more than width")
+            console.log("height is more than width")
         } else if (window.innerHeight < window.innerWidth) {
             //width is more than height
             this.#boardHeight = Math.floor(window.innerHeight * 0.85);
@@ -125,7 +125,7 @@ class WSRenderer {
         this.#canvas.getContext('2d').arc(cellXCenter, cellYCenter, 0.5 * this.#boardCellHeight, 0, 2 * Math.PI);
 
         //get cell colour
-        //console.log(`${colours.getCurrentColour()}`);
+        console.log(`${colours.getCurrentColour()}`);
         this.#canvas.getContext('2d').fillStyle = `${colours.getCurrentColour()}`;
         this.#canvas.getContext('2d').fill();
     }

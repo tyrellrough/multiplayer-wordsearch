@@ -52,7 +52,7 @@ export default function WordSearchCanvas(props) {
         const currentCell1D = ArrayHelperFunctions.convert2DIndexTo1D(currentCell2D[0], currentCell2D[1], numBoardRows);
 
 
-        //console.log(currentCell1D)
+        console.log(currentCell1D)
         //set the selction start index
         wsBoardRef.current.selection.startIndex = currentCell1D;
         wsBoardRef.current.selection.startIndex2D = currentCell2D;
@@ -130,7 +130,7 @@ export default function WordSearchCanvas(props) {
         const currentDirection = wsBoardRef.current.selection.direction;
 
 
-       // console.log(currentDirection);
+        console.log(currentDirection);
 
         //check if selected cell is valid in terms of direction
         let isCellAlongValidDir;
@@ -158,9 +158,6 @@ export default function WordSearchCanvas(props) {
 
 
     function handleMouseUp(e) {
-
-
-
         wsBoardRef.current.wordLocations.forEach(wordLocation => {
             //if the word has not been found yet
             if(!wordLocation.isFound) {
@@ -173,23 +170,23 @@ export default function WordSearchCanvas(props) {
                 if((isMatchingStartIndex && isMatchingEndIndex) || (isMatchingStartIndexReverse && isMatchingEndIndexReverse)) {
                     wordLocation.isFound = true;
 
-                  //  console.log("word found");
+                    console.log("word found");
                     //props.wordsList[0].setIsFound(true);
 
 
                     const wordIndex = props.wordsList.findIndex(x => x.text === wordLocation.word);
-                  //  console.log(props.wordsList);
+                    console.log(props.wordsList);
 
                     props.wordsList[wordIndex].setIsFound(true);
                     const tempUpdatedWordsList = [...props.wordsList];
 
-                   // console.log("temp updated", tempUpdatedWordsList);
+                    console.log("temp updated", tempUpdatedWordsList);
 
 
                     //console.log("temp updated wordslist");
-                  //  console.log(tempUpdatedWordsList);
+                    console.log(tempUpdatedWordsList);
                     props.setWordsList(tempUpdatedWordsList);
-                 //   console.log("props after word select", props.wordsList);
+                    console.log("props after word select", props.wordsList);
 
                     //highlight cells of the found word
                     //if word was selected backwards
@@ -199,6 +196,8 @@ export default function WordSearchCanvas(props) {
                     } else {
                         wsBoardRef.current.highlightCellsInRange(wordLocation.wordStartIndex, wordLocation.wordEndIndex,  wsBoardRef.current.selection.direction, colourRef.current);
                     }
+
+
                 }
             }
 
@@ -241,10 +240,10 @@ export default function WordSearchCanvas(props) {
         const y = e.pageY - rect.top;
         const diffX = Math.abs(x - clickX);
         const diffY = Math.abs(y - clickY);
-        const cellsAmntX = Math.floor(diffX / boardCellHeight);
-        const cellsAmntY = Math.floor(diffY / boardCellHeight);
+        const cellsAmntX = Math.round(diffX / boardCellHeight);
+        const cellsAmntY = Math.round(diffY / boardCellHeight);
         const numberOfCells = Math.max(cellsAmntY, cellsAmntX);
-      //  console.log(`numcells ${numberOfCells}`);
+        console.log(`numcells ${numberOfCells}`);
         return numberOfCells;
     }
 
