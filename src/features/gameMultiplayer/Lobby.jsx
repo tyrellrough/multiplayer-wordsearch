@@ -11,7 +11,6 @@ import {
 
 } from "./multiPlayerGameSlice.js";
 import Colours from "../gameBoard/Colours.js";
-import MultiplayerGameOptionsSelector from "../gameOptions/MultiplayerGameOptionsSelector.jsx";
 
 export default function Lobby(props) {
 
@@ -20,7 +19,6 @@ export default function Lobby(props) {
     const gameName = useSelector(state => state.multiPlayerGame.gameName);
     const size = useSelector(state => state.multiPlayerGame.gameSize);
     const theme = useSelector(state => state.multiPlayerGame.gameTheme);
-    //const currentPlayer = useSelector(state => state.multiPlayerGame.currentPlayer);
 
     const dispatch = useDispatch();
     const colours = new Colours();

@@ -6,7 +6,6 @@ import WordSP from "../gameBoard/WordSP.js";
 import {useEffect, useState} from "react";
 import WordsList from "./WordsList.jsx";
 import WordSearchCanvas from "./WordSearchCanvas.jsx";
-import GameEndOverlay from "./GameEndOverlay.jsx";
 
 
 
@@ -26,42 +25,17 @@ export default function GameContainerSinglePlayer() {
     const {data,error, isSuccess, isLoading}  = useGetWordsByCategoryQuery(argumentsObject);
     const [wordsList, setWordsList] = useState([]);
     const [isDone, setIsDone] = useState(false);
-    const [isGameComplete, setIsGameComplete] = useState(false);
 
     useEffect(() => {
         if(isSuccess) {
-            //let tempList = [];
             data.forEach((word) => {
-                //tempList.push(new WordSP(word.text, false))
+                wordsList.push(new WordSP(word.text, false))
                 console.log("pushing new")
-                setWordsList(wordsList => [...wordsList, new WordSP(word.text, false)]);
             })
-            //setWordsList(tempList);
             setIsDone(true);
         }
 
-    }, [data]);
-
-
-    useEffect(() => {
-
-        console.log("wordsList count", wordsList.length);
-        let wordsLeft = wordsList.length;
-        wordsList.forEach(word => {
-            if(word.isFound) {
-                wordsLeft--;
-
-            }
-        })
-
-        if(wordsLeft <= 0) {
-            setIsGameComplete(true);
-        } else {
-            setIsGameComplete(false);
-        }
-        console.log("wordsLeft count", wordsLeft);
-
-    }, [wordsList]);
+    }, [data,wordsList,isSuccess]);
 
     if(!isDone) {
         return (
@@ -72,8 +46,6 @@ export default function GameContainerSinglePlayer() {
     } else {
         return(
                 <div className="h-[90vh] flex gap-2 sm:flex-row flex-col place-items-center justify-center w-full">
-                    <GameEndOverlay isGameComplete={isGameComplete}/>
-
                     <WordSearchCanvas wordsList={wordsList} setWordsList={setWordsList} boardWidth={puzzleWidth} />
                     <WordsList wordsList={wordsList}/>
                 </div>
