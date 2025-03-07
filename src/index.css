@@ -67,3 +67,76 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.offset {
+  transform: translateX(-100%);
+}
+
+
+.fill-parent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.hide-overflow {
+  z-index: -1;
+  overflow: hidden;
+}
+
+.starbg {
+  background-image: url('/src/assets/StarPattern3.svg');
+  background-size: 10%;
+  background-color: gold;
+}
+
+.randomShapesBG {
+  background-image: url('/src/assets/random-shapes.svg');
+  background-size: 10%;
+}
+
+.doodleBG {
+  background-image: url('/src/assets/confetti-doodles.svg');
+  background-size: 20%;
+
+}
+
+.puzzleBG {
+  background-image: url('/src/assets/puzzlePattern.svg');
+
+}
+
+
+
+#parent {
+  position: relative;
+
+}
+
+#background-wrapper {
+  animation: translate 360s linear infinite;
+
+}
+
+#bg-gradient {
+  background: radial-gradient(circle, transparent 90%, rgb(var(--white)));
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  z-index: 2;
+}
+
+@keyframes translate {
+  0% {
+    transform: translateX(0px)
+  }
+
+  to {
+    transform: translateX(100%)
+  }
+}

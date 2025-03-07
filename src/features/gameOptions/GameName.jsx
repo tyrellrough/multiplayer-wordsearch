@@ -4,7 +4,6 @@ import {setGameName} from "./gameOptionsSlice.js";
 
 export default function GameName(props) {
     const dispatch = useDispatch();
-    const gameName = useSelector(state => state.gameOptions.gameName);
 
     function GetNewGameName() {
         props.connection.invoke("GetNewGameName").then((gameName) => {

@@ -32,7 +32,7 @@ export default function GameEndHandler(props) {
 
     if(currentPlayer.isHost) {
         return (
-            <div>
+            <div className={"flex gap-2"}>
                 <button onClick={() => EndGameHandler()}>End Game</button>
                 <button onClick={() => ReturnLobbyHandler()}>New Game</button>
             </div>

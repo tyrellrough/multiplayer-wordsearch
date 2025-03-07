@@ -6,7 +6,7 @@ import {setGameGuid} from "./gameOptionsSlice.js";
 export default function GameGuid(props) {
 
     const dispatch = useDispatch();
-    const gameGuid = useSelector((state) => state.gameOptions.gameGuid);
+
 
     function GetNewGameGuid() {
         props.connection.invoke("GetNewGuid").then((guid) => {

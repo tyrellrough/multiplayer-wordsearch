@@ -76,7 +76,6 @@ export default function MultiplayerPage() {
                         <p className={"text-3xl"}>New Multiplayer Game</p>
                         <div>
                             <MultiplayerGameOptionsSelector connection={connection}/>
-                            <CreateGameButton/>
 
                         </div>
 

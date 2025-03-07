@@ -3,8 +3,8 @@ import {useDispatch} from 'react-redux'
 import {changePage} from "../pageSwitcher/pageSwitcherSlice.js";
 import {setCurrentPageState, setLobbyState} from "./multiPlayerGameSlice.js";
 
-export default function CreateGameButton() {
 
+export default function CreateGameButton(props) {
     const dispatch = useDispatch()
 
     const clickHandler = () => {
@@ -15,7 +15,14 @@ export default function CreateGameButton() {
 
     }
 
-    return (
-        <button onClick={clickHandler}>Create Multiplayer Game</button>
-    )
+    if(!props.isLoaded) {
+        return (
+            <p>Loading ...</p>
+        )
+    } else {
+        return (
+            <button onClick={clickHandler}>Create Multiplayer Game</button>
+        )
+    }
+
 }
