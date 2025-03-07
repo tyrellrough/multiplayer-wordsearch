@@ -23,7 +23,7 @@ export default function GameInfoElement(props) {
     }
 
     return (
-        <div className="flex justify-between w-96 gap-4">
+        <div className="flex justify-between w-96 gap-4 py-5">
             <div className="flex flex-col justify-center w-full">
                 <div className="flex justify-between">
                     <p>{props.gameName}</p>

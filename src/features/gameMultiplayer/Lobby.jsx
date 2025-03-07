@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import ColourChanger from "./ColourChanger.jsx";
 import PlayerNameChanger from "./PlayerNameChanger.jsx";
 import ColouredSquare from "./ColouredSquare.jsx";
-import PlayerInfo from "./PlayerInfo.jsx";
+import PlayerColourInfo from "./PlayerColourInfo.jsx";
 import StartGameButton from "./StartGameButton.jsx";
 import {
     setCurrentPageState, setCurrentPlayer,
@@ -19,6 +19,7 @@ export default function Lobby(props) {
     const gameName = useSelector(state => state.multiPlayerGame.gameName);
     const size = useSelector(state => state.multiPlayerGame.gameSize);
     const theme = useSelector(state => state.multiPlayerGame.gameTheme);
+    const currentPlayer = useSelector(state => state.multiPlayerGame.currentPlayer);
 
     const dispatch = useDispatch();
     const colours = new Colours();
@@ -95,32 +96,52 @@ export default function Lobby(props) {
 
 
     return (
-        <div>
-            <p className="text-3xl">Lobby</p>
-            <p>Game Name: {gameName}</p>
-            <p>Game GUID: {gameGUID}</p>
-            <p>Word Theme: {theme}</p>
-            <p>Board Size: {size}</p>
-            <p className="underline">Players</p>
-            <div>
-                <div className="flex justify-center gap-4">
-                    <p className="w-40">Player Name</p>
-                    <p className="w-40">Player Colour</p>
-                    <p className="w-40">Change Colour</p>
+        <div className={"h-5/6 flex flex-col justify-between items-center w-full"}>
+            <div className={"flex flex-col gap-4 w-full"}>
+                <div>
+                    <p className="text-4xl py-2">Lobby</p>
+                    <p>Game Name: {gameName}</p>
+                    <p>Game GUID: {gameGUID}</p>
+                    <p>Word Theme: {theme}</p>
+                    <p>Board Size: {size}</p>
                 </div>
 
-                <div>
-                    {playersList.map((player, index) =>
-                        <div key={index} className="flex justify-center gap-4">
-                            <PlayerInfo connection={props.connection}
-                                        gameGUID = {gameGUID} player={player}
-                            />
+                <div className={""}>
+                    <p className={"text-2xl underline"}>Players</p>
+                    <div className={"w-full flex justify-evenly"}>
+
+                        <div className={"flex flex-col"}>
+
+                            <p>Name</p>
+                            {playersList.map((player, index) =>
+                                <div key={index} className="flex h-10 gap-2 justify-center items-center">
+                                    {currentPlayer.playerID === player.playerID ?
+                                        <PlayerNameChanger connection={props.connection} playerName={player.name}
+                                                           gameGuid={gameGUID}
+                                        /> : <p>{player.name}</p>}
+
+                                </div>
+                            )}
+
                         </div>
-                    )}
+
+                        <div className={"flex flex-col"}>
+                            <p>Colour</p>
+                            {playersList.map((player, index) =>
+                                <div key={index} className="flex h-10 gap-2 justify-evenly items-center">
+                                    <PlayerColourInfo connection={props.connection} player={player}/>
+                                </div>
+                            )}
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <StartGameButton connection={props.connection} />
+            <div className={"w-1/4"}>
+                <StartGameButton connection={props.connection}/>
+            </div>
+
         </div>
     )
 }

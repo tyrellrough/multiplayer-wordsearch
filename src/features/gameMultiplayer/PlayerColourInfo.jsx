@@ -1,6 +1,12 @@
-import ColouredSquare from "../gameMultiplayer/ColouredSquare.jsx";
+import PlayerNameChanger from "./PlayerNameChanger.jsx";
+import ColouredSquare from "./ColouredSquare.jsx";
+import ColourChanger from "./ColourChanger.jsx";
+import {Fragment, useEffect, useState} from "react";
+import {useSelector} from "react-redux";
 
-export default function PlayerStatElement(props) {
+export default function PlayerColourInfo(props) {
+
+    const currentPlayer = useSelector(state => state.multiPlayerGame.currentPlayer);
 
     let bg;
     //const bg = "bg-wordSearch-green";
@@ -34,14 +40,17 @@ export default function PlayerStatElement(props) {
             break;
     }
 
-    return (
-        <div className={"flex items-center justify-center gap-2 flex-wrap"}>
-            <p className={"max-w-15 text-wrap"}>{props.player.name}</p>
-            <div>
-                <ColouredSquare colour={bg}/>
-                <p>{props.player.wordsFoundCount}</p>
-            </div>
 
-        </div>
+    return (
+       <Fragment>
+           <p>{props.player.colour}</p>
+           <ColouredSquare colour={bg} />
+           {currentPlayer.playerID === props.player.playerID ?
+               <ColourChanger connection={props.connection} currentColour={currentPlayer.colour}
+               /> : null}
+       </Fragment>
+
+
+
     );
 }

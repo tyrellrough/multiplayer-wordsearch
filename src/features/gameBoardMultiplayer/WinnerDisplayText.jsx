@@ -34,7 +34,7 @@ export default function WinnerDisplayText(props) {
 
     return (
         <div>
-            <p> Winners </p>
+            <p> Winner(s) </p>
             <div className="flex gap-2 justify-center">
                 {winners.map((player, i) =>
                     <div key={i}>

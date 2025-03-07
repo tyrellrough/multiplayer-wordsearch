@@ -30,16 +30,16 @@ export default function GameStats(props) {
     if(isHidden) {
         return (
             <div>
-                <button onClick={() => ToggleDisplayedClickHandler()}>Show</button>
+                {/*<button onClick={() => ToggleDisplayedClickHandler()}>Show</button>*/}
                 <p>Hidden</p>
             </div>
         );
     } else {
         return (
-            <div>
-                <button onClick={() => ToggleDisplayedClickHandler()}>Hide</button>
+            <div className={"h-full flex flex-col justify-center"}>
+                {/*<button onClick={() => ToggleDisplayedClickHandler()}>Hide</button>*/}
 
-                <p>GameStats</p>
+                <p>Score</p>
                 {playerStats.map((player, index) =>
                     <div key={index}>
                         <PlayerStatElement player={player}/>

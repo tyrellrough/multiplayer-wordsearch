@@ -22,6 +22,8 @@ import BackButton from "../pageSwitcher/BackButton.jsx";
 import NavigationBarInGame from "./NavigationBarInGame.jsx";
 import MultiplayerGameOptionsSelector from "../gameOptions/MultiplayerGameOptionsSelector.jsx";
 import CreateGameButton from "./CreateGameButton.jsx";
+import SinglePlayerGameOptionsSelector from "../gameOptions/SinglePlayerGameOptionsSelector.jsx";
+import NavigationButton from "../pageSwitcher/NavigationButton.jsx";
 
 export default function MultiplayerPage() {
 
@@ -60,28 +62,51 @@ export default function MultiplayerPage() {
         )
 
     } else if(pageState === "newGameCreator") {
-        return(
-            <div>
+        return (
+            <div className={"flex flex-col h-screen"}>
                 <NavigationBar/>
-                <MultiplayerGameOptionsSelector connection={connection} />
-                <CreateGameButton />
-            </div>
 
+
+                <div className={"flex h-screen justify-center"}>
+
+                    <div className={"h-5/6 flex flex-col justify-center gap-4"}>
+                        <div className={"flex"}>
+                            <BackButton/>
+                        </div>
+                        <p className={"text-3xl"}>New Multiplayer Game</p>
+                        <div>
+                            <MultiplayerGameOptionsSelector connection={connection}/>
+                            <CreateGameButton/>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
         );
-    } else if(pageState === "gamesList") {
-        return(
-            <div>
+    } else if (pageState === "gamesList") {
+        return (
+            <div className={"h-screen flex flex-col"}>
                 <NavigationBar/>
-                <BackButton />
-                <JoinGameList connection={connection}/>
+
+                <div className={"flex flex-col h-screen justify-center"}>
+                    <div className={"h-5/6 flex flex-col justify-center items-center"}>
+                        <JoinGameList connection={connection}/>
+                    </div>
+                </div>
+
+
             </div>
         )
-    } else if(pageState === "lobby") {
+    } else if (pageState === "lobby") {
         console.log("page state is lobby")
         //add user to group named the guid
         //connection.invoke("RemoveFromGroup", "lobby").then()
 
-        if(lobbyState === "newLobby") {
+        if (lobbyState === "newLobby") {
             console.log("lobby state is new lobby")
             dispatch(setGameName(gameName));
             dispatch(setGameGUID(gameGUID));
@@ -90,10 +115,10 @@ export default function MultiplayerPage() {
         }
 
             return (
-                <Fragment>
+                <div className={"h-screen"}>
                     <NavigationBarInGame connection={connection}/>
                     <Lobby connection={connection} />
-                </Fragment>
+                </div>
             )
 
 

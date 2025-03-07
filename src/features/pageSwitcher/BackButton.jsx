@@ -10,6 +10,6 @@ export default function HomeButton() {
     }
 
     return (
-        <button onClick={clickHandler}>Back</button>
+        <button onClick={clickHandler} className={""}>← Back</button>
     );
 }

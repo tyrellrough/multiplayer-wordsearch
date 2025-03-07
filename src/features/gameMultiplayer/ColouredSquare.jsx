@@ -5,7 +5,7 @@ export default function ColouredSquare(props) {
 
     return(
         <div className={props.colour}>
-            ___
+            ⠀⠀⠀
         </div>
     )
 }

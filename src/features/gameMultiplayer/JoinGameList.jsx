@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import GameInfoElement from "./GameInfoElement.jsx";
+import BackButton from "../pageSwitcher/BackButton.jsx";
 
 export default function JoinGameList(props) {
     //get a list of games
@@ -90,13 +91,17 @@ export default function JoinGameList(props) {
         );
     } else {
         return (
-            <div>
-                <p>game list</p>
+            <div className={"h-full flex flex-col justify-between"}>
+
+                <div className={"flex"}>
+                    <BackButton/>
+                </div>
+                <p className={"text-3xl"}>Games List</p>
 
                 {/*{gameList.map((gameInfo, index) => (*/}
                 {/*    <div key={index}>{gameInfo.name}</div>*/}
                 {/*))}*/}
-                <div className="flex items-center flex-col">
+                <div className="flex items-center flex-col h-full">
                     {gameList.map((gameInfo, index) => (
                         <GameInfoElement key={index} gameName={gameInfo.name} playerCount={gameInfo.playerCount}
                                          maxPlayerCount={gameInfo.maxNumberOfPlayers} theme={gameInfo.theme}
@@ -105,16 +110,16 @@ export default function JoinGameList(props) {
                     ))}
                 </div>
 
-                
-                <div>
+
+                <div className={"flex gap-8"}>
                     <button onClick={() => {
                         DecreasePageNumber()
-                    }}>Decrease page num
+                    }}>Previous Page
                     </button>
                     <p>{pageNumber}</p>
                     <button onClick={() => {
                         IncreasePageNumber()
-                    }}>Increase page num
+                    }}>Next Page
                     </button>
                 </div>
             </div>
