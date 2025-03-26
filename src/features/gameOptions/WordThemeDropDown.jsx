@@ -5,7 +5,6 @@ import {setWordsCategory} from "./gameOptionsSlice.js";
 
 export default function WordThemeDropDown(){
     const {data = [], error, isLoading}  = useGetCategoriesQuery(undefined, undefined);
-
     const dispatch = useDispatch();
     const onWordThemeSelection = e => {
         dispatch(setWordsCategory(e.target.value));

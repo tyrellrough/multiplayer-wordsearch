@@ -1,6 +1,7 @@
-import {useEffect, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import GameInfoElement from "./GameInfoElement.jsx";
 import BackButton from "../pageSwitcher/BackButton.jsx";
+import GamesListBackButton from "../pageSwitcher/GamesListBackButton.jsx";
 
 export default function JoinGameList(props) {
     //get a list of games
@@ -91,38 +92,41 @@ export default function JoinGameList(props) {
         );
     } else {
         return (
-            <div className={"h-full flex flex-col justify-between"}>
+            <div className={"h-full w-full sm:w-[80vw] md:w-[70vw] lg:w-[50vw] flex flex-col justify-between sm:p-5 text-sm border border-black rounded-lg z-10 bg-white"}>
 
-                <div className={"flex"}>
-                    <BackButton/>
+                <div>
+                    <div className={"flex"}>
+                        <GamesListBackButton connection={props.connection}/>
+                    </div>
+
+                    <div>
+                        <p className={"text-3xl underline underline-offset-1"}>Games List</p>
+                    </div>
                 </div>
-                <p className={"text-3xl"}>Games List</p>
 
-                {/*{gameList.map((gameInfo, index) => (*/}
-                {/*    <div key={index}>{gameInfo.name}</div>*/}
-                {/*))}*/}
-                <div className="flex items-center flex-col h-full">
+
+                <div className="flex items-center flex-col overflow-y-auto">
                     {gameList.map((gameInfo, index) => (
                         <GameInfoElement key={index} gameName={gameInfo.name} playerCount={gameInfo.playerCount}
-                                         maxPlayerCount={gameInfo.maxNumberOfPlayers} theme={gameInfo.theme}
-                                         size={gameInfo.size} guid={gameInfo.guid} connection={props.connection}
-                        />
-                    ))}
+                                             maxPlayerCount={gameInfo.maxNumberOfPlayers} theme={gameInfo.theme}
+                                             size={gameInfo.size} guid={gameInfo.guid} connection={props.connection}
+                            />
+                        ))}
                 </div>
 
 
-                <div className={"flex gap-8"}>
-                    <button onClick={() => {
-                        DecreasePageNumber()
-                    }}>Previous Page
-                    </button>
-                    <p>{pageNumber}</p>
-                    <button onClick={() => {
-                        IncreasePageNumber()
-                    }}>Next Page
-                    </button>
+                    <div className={"flex gap-8 justify-center"}>
+                        <button onClick={() => {
+                            DecreasePageNumber()
+                        }}>Previous Page
+                        </button>
+                        <p>{pageNumber}</p>
+                        <button onClick={() => {
+                            IncreasePageNumber()
+                        }}>Next Page
+                        </button>
+                    </div>
                 </div>
-            </div>
-        )
-    }
-}
+                    )
+                }
+                }

@@ -24,6 +24,7 @@ import MultiplayerGameOptionsSelector from "../gameOptions/MultiplayerGameOption
 import CreateGameButton from "./CreateGameButton.jsx";
 import SinglePlayerGameOptionsSelector from "../gameOptions/SinglePlayerGameOptionsSelector.jsx";
 import NavigationButton from "../pageSwitcher/NavigationButton.jsx";
+import GamesListNavigationBar from "../pageSwitcher/GamesListNavigationBar.jsx";
 
 export default function MultiplayerPage() {
 
@@ -63,13 +64,13 @@ export default function MultiplayerPage() {
 
     } else if(pageState === "newGameCreator") {
         return (
-            <div className={"flex flex-col h-screen"}>
+            <div className={"flex flex-col h-screen bg-[#4267b2]"}>
                 <NavigationBar/>
 
 
-                <div className={"flex h-screen justify-center"}>
+                <div className={"h-5/6 flex flex-col justify-center items-center max-w-screen"}>
 
-                    <div className={"h-5/6 flex flex-col justify-center gap-4"}>
+                    <div className={"flex flex-col gap-5 border p-5 border-black rounded-md bg-white"}>
                         <div className={"flex"}>
                             <BackButton/>
                         </div>
@@ -88,8 +89,11 @@ export default function MultiplayerPage() {
         );
     } else if (pageState === "gamesList") {
         return (
-            <div className={"h-screen flex flex-col"}>
-                <NavigationBar/>
+            <div className={"h-screen flex flex-col bg-[#4267b2]"}>
+
+
+
+                <GamesListNavigationBar connection={connection}/>
 
                 <div className={"flex flex-col h-screen justify-center"}>
                     <div className={"h-5/6 flex flex-col justify-center items-center"}>
@@ -114,7 +118,7 @@ export default function MultiplayerPage() {
         }
 
             return (
-                <div className={"h-screen"}>
+                <div className={"h-screen bg-[#4267b2] justify-center"}>
                     <NavigationBarInGame connection={connection}/>
                     <Lobby connection={connection} />
                 </div>

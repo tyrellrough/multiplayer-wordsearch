@@ -29,7 +29,7 @@ function App() {
     )
     } else if (currentPage === "newSinglePlayer") {
         return (
-            <div className="h-screen">
+            <div className="h-screen bg-[#4267b2]">
                 <NavigationBar/>
                 <SinglePlayerPage/>
             </div>

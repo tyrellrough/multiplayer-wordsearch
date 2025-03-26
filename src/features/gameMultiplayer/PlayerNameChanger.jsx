@@ -9,14 +9,15 @@ export default function PlayerNameChanger(props) {
     }
 
     return (
-        <Fragment>
+        <div className={"flex flex-col md:flex-row md:gap-2 text-sm"}>
             <input name="playerNameInput" type="text" value={newName}
                    onChange={e => setNewName(e.target.value)}
-                    className="border"
+                    className="border sm:w-fit"
+
             />
-            <button onClick={() => { changeName()
+            <button className="" onClick={() => { changeName()
             }}>Update Name</button>
-        </Fragment>
+        </div>
     )
 
 }

@@ -37,6 +37,12 @@ export default function GameEndHandler(props) {
                 <button onClick={() => ReturnLobbyHandler()}>New Game</button>
             </div>
         );
+    } else {
+        return (
+            <div>
+                <p>Waiting for host</p>
+            </div>
+        )
     }
 
 

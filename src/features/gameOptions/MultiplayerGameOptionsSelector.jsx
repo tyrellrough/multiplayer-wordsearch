@@ -30,7 +30,7 @@ export default function MultiplayerGameOptionsSelector(props) {
     }, [])
 
     return(
-        <div className="flex flex-col items-center gap-1 pb-4">
+        <div className="flex flex-col items-center gap-2 pb-4">
             <p className="underline text-2xl">Puzzle Size</p>
             <PuzzleSizeRadioGroup/>
 
@@ -38,8 +38,11 @@ export default function MultiplayerGameOptionsSelector(props) {
             <WordThemeDropDown/>
             <p className="underline text-2xl">Game Name</p>
             <p>{gameName}</p>
-            <p>{gameGuid}</p>
-            <CreateGameButton isLoaded={isLoaded} />
+
+            <div>
+                <CreateGameButton isLoaded={isLoaded} />
+            </div>
+
         </div>
     );
 }

@@ -26,7 +26,7 @@ export default function MultiplayerWordsList(props) {
     }, [])
 
     return (
-        <div>
+        <div className={"flex flex-wrap flex-row justify-center gap-2 sm:flex-col sm:gap-0"}>
             {words.map((word, index) => (
                 <WordListElementMultiplayer key={index} word={word}/>
             ))}

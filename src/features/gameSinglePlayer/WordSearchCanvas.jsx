@@ -10,6 +10,7 @@ import CardinalDirections from "./../gameBoard/CardinalDirections.js";
 import WSBoard from "./../gameBoard/WSBoard.js";
 import WSRenderer from "./../gameBoard/WSRenderer.js";
 import Colours from "../gameBoard/Colours.js";
+import {useSelector} from "react-redux";
 
 
 
@@ -20,12 +21,32 @@ export default function WordSearchCanvas(props) {
     const wsBoardRef = useRef(null);
     const renderRef = useRef(null);
     const colourRef = useRef(null);
+    const foundSoundRef = useRef(new Audio("/src/audio/winAudio.mp3"))
+    const isAudioTurnedOn = useRef(true);
+    const isAudioOn = useSelector(state => state.gameAudio.isOn);
+
     let boardCellHeight = 0;
     const numBoardRows = props.boardWidth;
     const numBoardColumns = props.boardWidth;
     let clickX = 0;
     let clickY = 0;
+    //let foundSound = new Audio("/src/audio/winAudio.mp3")
 
+    function playWordFoundSound() {
+        console.log("isAUdioturned on play", isAudioTurnedOn);
+        if(isAudioTurnedOn.current) {
+            console.log("playing sound")
+            foundSoundRef.current.play().then();
+        } else {
+            console.log("not playing sound")
+        }
+
+    }
+
+    useEffect(() => {
+
+        isAudioTurnedOn.current = isAudioOn;
+    }, [isAudioOn]);
 
     useEffect(() => {
         console.log("ws mounted");
@@ -52,7 +73,7 @@ export default function WordSearchCanvas(props) {
         const currentCell1D = ArrayHelperFunctions.convert2DIndexTo1D(currentCell2D[0], currentCell2D[1], numBoardRows);
 
 
-        console.log(currentCell1D)
+        console.log("touchstart")
         //set the selction start index
         wsBoardRef.current.selection.startIndex = currentCell1D;
         wsBoardRef.current.selection.startIndex2D = currentCell2D;
@@ -104,6 +125,7 @@ export default function WordSearchCanvas(props) {
         const currentCell2D = getMouseCurrentCell(e);
         const currentCell1D = ArrayHelperFunctions.convert2DIndexTo1D(currentCell2D[0], currentCell2D[1], numBoardRows);
 
+        console.log("mousedown")
         //set the selction start index
         wsBoardRef.current.selection.startIndex = currentCell1D;
         wsBoardRef.current.selection.startIndex2D = currentCell2D;
@@ -157,6 +179,8 @@ export default function WordSearchCanvas(props) {
 
 
 
+
+
     function handleMouseUp(e) {
         wsBoardRef.current.wordLocations.forEach(wordLocation => {
             //if the word has not been found yet
@@ -171,7 +195,8 @@ export default function WordSearchCanvas(props) {
                     wordLocation.isFound = true;
 
                     console.log("word found");
-                    //props.wordsList[0].setIsFound(true);
+                   //console.log("audio state", isAudioOn)
+                    playWordFoundSound();
 
 
                     const wordIndex = props.wordsList.findIndex(x => x.text === wordLocation.word);

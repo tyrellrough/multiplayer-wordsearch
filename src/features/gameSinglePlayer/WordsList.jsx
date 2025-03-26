@@ -24,7 +24,7 @@ export default function WordsList(props) {
     } else {
         return (
             <div
-                className="overflow-y-auto overflow-x-hidden text-xl flex flex-row flex-wrap gap-2 sm:max-h-[90vh] sm:flex-col sm:flex-nowrap sm:text-3xl sm:gap-4 justify-center items-center">
+                className="overflow-y-auto overflow-x-hidden flex flex-row flex-wrap gap-2 max-h-[87vh] sm:flex-col sm:flex-nowrap sm:gap-4 justify-center items-center">
                 {listWordElements}
             </div>
         );

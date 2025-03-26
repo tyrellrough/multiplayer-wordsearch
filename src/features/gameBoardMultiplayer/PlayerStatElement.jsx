@@ -36,7 +36,7 @@ export default function PlayerStatElement(props) {
 
     return (
         <div className={"flex items-center justify-center gap-2 flex-wrap"}>
-            <p className={"max-w-15 text-wrap"}>{props.player.name}</p>
+            <p className={"max-w-20 truncate lg:max-w-32 xl:max-w-40"}>{props.player.name}</p>
             <div>
                 <ColouredSquare colour={bg}/>
                 <p>{props.player.wordsFoundCount}</p>

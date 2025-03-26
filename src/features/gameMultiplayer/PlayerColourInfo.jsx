@@ -42,13 +42,19 @@ export default function PlayerColourInfo(props) {
 
 
     return (
-       <Fragment>
-           <p>{props.player.colour}</p>
-           <ColouredSquare colour={bg} />
-           {currentPlayer.playerID === props.player.playerID ?
-               <ColourChanger connection={props.connection} currentColour={currentPlayer.colour}
-               /> : null}
-       </Fragment>
+       <div className={"flex flex-col"}>
+           <div className={"flex gap-2"}>
+               <p>{props.player.colour}</p>
+               <ColouredSquare colour={bg}/>
+           </div>
+
+           <div>
+               {currentPlayer.playerID === props.player.playerID ?
+                   <ColourChanger connection={props.connection} currentColour={currentPlayer.colour}
+                   /> : null}
+           </div>
+
+       </div>
 
 
 

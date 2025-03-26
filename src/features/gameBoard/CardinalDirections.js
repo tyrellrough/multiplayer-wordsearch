@@ -49,14 +49,21 @@ class CardinalDirections {
     }
 
     static calcDirectionFromPos(e, canvasRef, initialClickY, initialClickX) {
+
+
         const rect = canvasRef.current.getBoundingClientRect();
         //mouse current position.
         const x = e.pageX - rect.left;
         const y = e.pageY - rect.top;
 
+        console.log("rect", rect);
+        console.log("e.pageX", e.pageX);
+        console.log("e.pageY", e.pageY);
+
         const dX = x - initialClickX;
         const dY = y - initialClickY;
 
+       // console.log("calcdirfrompos y: ", initialClickY + " x: " + initialClickX + " x:" + x + " y: " + y);
 
         const angle = Math.atan2(dY, dX);
         const degree = this.radianToNormalDegrees(angle);
@@ -65,6 +72,30 @@ class CardinalDirections {
         //console.log(`angle ${angle} degree ${degree} dir ${dir}`);
         return dir;
     }
+
+    static calcDirectionFromTouchPos(e, canvasRef, initialClickY, initialClickX) {
+
+
+        const rect = canvasRef.current.getBoundingClientRect();
+        //mouse current position.
+        const x = e.touches[0].pageX - rect.left;
+        const y = e.touches[0].pageY - rect.top;
+
+
+
+        const dX = x - initialClickX;
+        const dY = y - initialClickY;
+
+       // console.log("calcdirfrompos y: ", initialClickY + " x: " + initialClickX + " x:" + x + " y: " + y);
+
+        const angle = Math.atan2(dY, dX);
+        const degree = this.radianToNormalDegrees(angle);
+        const dir = this.convertDegreeToDirection(degree);
+
+        //console.log(`angle ${angle} degree ${degree} dir ${dir}`);
+        return dir;
+    }
+
 
     static calcTouchDirectionFromPos(e, canvasRef, initialTouchY, initialTouchX) {
         const rect = canvasRef.current.getBoundingClientRect();

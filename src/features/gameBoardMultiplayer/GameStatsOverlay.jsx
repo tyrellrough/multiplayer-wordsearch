@@ -22,7 +22,7 @@ export default function GameStatsOverlay(props) {
 
     if(GameState === "complete") {
         return (
-            <div className={"absolute text-4xl border p-10 bg-opacity-90 rounded-lg bg-[#ffffff] z-0"}>
+            <div className={"absolute text-lg md:text-2xl border p-10 bg-opacity-90 rounded-lg bg-[#ffffff] z-0"}>
                 <div className={"flex flex-col gap-4"}>
                     <div>
                         <WinnerDisplayText playerStats={playerStats}/>

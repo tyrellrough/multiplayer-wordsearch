@@ -37,6 +37,8 @@ export default function GameContainerSinglePlayer() {
 
     }, [data,wordsList,isSuccess]);
 
+
+
     if(!isDone) {
         return (
             <div>
@@ -45,7 +47,7 @@ export default function GameContainerSinglePlayer() {
         );
     } else {
         return(
-                <div className="h-[90vh] flex gap-2 sm:flex-row flex-col place-items-center justify-center w-full">
+                <div className="h-[90vh] flex gap-2 sm:flex-row flex-col place-items-center justify-center w-full text-sm sm:text-md md:text-lg lg:text-xl">
                     <WordSearchCanvas wordsList={wordsList} setWordsList={setWordsList} boardWidth={puzzleWidth} />
                     <WordsList wordsList={wordsList}/>
                 </div>

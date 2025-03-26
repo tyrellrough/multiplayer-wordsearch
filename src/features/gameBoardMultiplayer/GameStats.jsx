@@ -36,7 +36,7 @@ export default function GameStats(props) {
         );
     } else {
         return (
-            <div className={"h-full flex flex-col justify-center"}>
+            <div className={"flex flex-col justify-center"}>
                 {/*<button onClick={() => ToggleDisplayedClickHandler()}>Hide</button>*/}
 
                 <p>Score</p>

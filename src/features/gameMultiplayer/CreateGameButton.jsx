@@ -21,6 +21,7 @@ export default function CreateGameButton(props) {
         )
     } else {
         return (
+
             <button onClick={clickHandler}>Create Multiplayer Game</button>
         )
     }

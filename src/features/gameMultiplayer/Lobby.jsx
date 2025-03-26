@@ -11,6 +11,8 @@ import {
 
 } from "./multiPlayerGameSlice.js";
 import Colours from "../gameBoard/Colours.js";
+import PlayerStatElement from "../gameBoardMultiplayer/PlayerStatElement.jsx";
+import PlayerInfo from "./PlayerInfo.jsx";
 
 export default function Lobby(props) {
 
@@ -25,6 +27,7 @@ export default function Lobby(props) {
     const colours = new Colours();
 
     const [playersList, setPlayersList] = useState([]);
+
     //const [currentPlayer, setCurrentPlayer] = useState({});
 
     function getPlayersList() {
@@ -69,24 +72,29 @@ export default function Lobby(props) {
         })
     }
 
+    function updateGames() {
+        props.connection.invoke("UpdateGames");
+    }
+
     useEffect(() => {
-        if(lobbyState === "newLobby") {
+        if (lobbyState === "newLobby") {
             dispatch(setIsHost(true));
             props.connection.invoke("CreateNewGame", gameGUID, gameName, size, theme).then(
                 () => {
-                    AddPlayerAndGetPlayers(true);
+                    AddPlayerAndGetPlayers(true).then(() => {
+                        updateGames();
+                    })
                 }
             );
-        } else if(lobbyState === "existingLobby") {
+        } else if (lobbyState === "existingLobby") {
             getPlayersList();
             getCurrentPlayer();
-        }
-        else {
-            AddPlayerAndGetPlayers(false);
+        } else {
+            AddPlayerAndGetPlayers(false).then()
         }
     }, []);
 
-    function AddPlayerAndGetPlayers(isHost) {
+    async function AddPlayerAndGetPlayers(isHost) {
         addCurrentPlayer(isHost).then(
             () => {
                 getPlayersList();
@@ -96,52 +104,39 @@ export default function Lobby(props) {
 
 
     return (
-        <div className={"h-5/6 flex flex-col justify-between items-center w-full"}>
-            <div className={"flex flex-col gap-4 w-full"}>
-                <div>
-                    <p className="text-4xl py-2">Lobby</p>
-                    <p>Game Name: {gameName}</p>
-                    <p>Game GUID: {gameGUID}</p>
-                    <p>Word Theme: {theme}</p>
-                    <p>Board Size: {size}</p>
-                </div>
+        <div className="flex justify-center">
+            <div className={"flex justify-center pt-1 h-[90vh] sm:w-[70vw] lg:w-[50vw]"}>
 
-                <div className={""}>
-                    <p className={"text-2xl underline"}>Players</p>
-                    <div className={"w-full flex justify-evenly"}>
-
-                        <div className={"flex flex-col"}>
-
-                            <p>Name</p>
-                            {playersList.map((player, index) =>
-                                <div key={index} className="flex h-10 gap-2 justify-center items-center">
-                                    {currentPlayer.playerID === player.playerID ?
-                                        <PlayerNameChanger connection={props.connection} playerName={player.name}
-                                                           gameGuid={gameGUID}
-                                        /> : <p>{player.name}</p>}
-
-                                </div>
-                            )}
-
+                <div className={"flex flex-col justify-between w-[90vw] bg-white border-black border rounded-lg"}>
+                    <div className={"flex flex-col gap-4 w-full"}>
+                        <div>
+                            <p className="text-4xl py-2">Lobby</p>
+                            <p>Game Name: {gameName}</p>
+                            <p>Word Theme: {theme}</p>
+                            <p>Board Size: {size}</p>
                         </div>
 
-                        <div className={"flex flex-col"}>
-                            <p>Colour</p>
-                            {playersList.map((player, index) =>
-                                <div key={index} className="flex h-10 gap-2 justify-evenly items-center">
-                                    <PlayerColourInfo connection={props.connection} player={player}/>
-                                </div>
-                            )}
-
+                        <div className={"w-full flex flex-col"}>
+                            <p className={"text-2xl underline"}>Players</p>
+                            <div className={"w-full flex flex-col items-center gap-2 overflow-y-scroll h-56"}>
+                                {playersList.map((player, index) =>
+                                    <PlayerInfo key={index} currentPlayer={currentPlayer} player={player}
+                                                connection={props.connection}
+                                                gameGUID={gameGUID} playerNum={index}/>
+                                )}
+                            </div>
                         </div>
                     </div>
+
+                    <div className={"flex justify-center"}>
+                        <StartGameButton connection={props.connection}/>
+                    </div>
                 </div>
-            </div>
 
-            <div className={"w-1/4"}>
-                <StartGameButton connection={props.connection}/>
-            </div>
 
+            </div>
         </div>
+
+
     )
 }
