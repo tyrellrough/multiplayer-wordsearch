@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import WordListElementMultiplayer from "./WordListElementMultiplayer.jsx";
-import ColourChanger from "../gameMultiplayer/ColourChanger.jsx";
+import ColourChanger from "../gameMultiPlayer/ColourChanger.jsx";
 import Colours from "../gameBoard/Colours.js";
 
 export default function MultiplayerWordsList(props) {

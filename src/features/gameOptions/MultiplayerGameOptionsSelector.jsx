@@ -5,7 +5,7 @@ import GameName from "./GameName.jsx";
 import GameGuid from "./GameGuid.jsx";
 import {setGameGuid, setGameName} from "./gameOptionsSlice.js";
 import {useDispatch, useSelector} from "react-redux";
-import CreateGameButton from "../gameMultiplayer/CreateGameButton.jsx";
+import CreateGameButton from "../gameMultiPlayer/CreateGameButton.jsx";
 import {useEffect, useState} from "react";
 
 export default function MultiplayerGameOptionsSelector(props) {

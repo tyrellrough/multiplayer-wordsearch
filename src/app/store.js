@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { wordSearchAPI } from "../services/wordSearchAPI.js";
 
-//import gameOptionsReducer from "../features/gameOptions/gameOptionsSlice.js";
-import gameOptionsReducer from "src/features/gameOptions/gameOptionsSlice.js";
-import pageSwitcherReducer from "src/features/pageSwitcher/pageSwitcherSlice.js";
-import screenReducer from "src/features/screen/screenSlice.js";
-import singlePlayerGameReducer from "src/features/gameSinglePlayer/singlePlayerGameSlice.js";
-import multiplayerGameReducer from "src/features/gameMultiPlayer/multiPlayerGameSlice.js";
-import gameAudioReducer from "src/features/audio/gameAudioSlice.js";
+//trying to fix these
+import gameOptionsReducer from './../features/gameOptions/gameOptionsSlice';
+import pageSwitcherReducer from './../features/pageSwitcher/pageSwitcherSlice';
+import screenReducer from './../features/screen/screenSlice';
+import singlePlayerGameReducer from './../features/gameSinglePlayer/singlePlayerGameSlice';
+import gameAudioReducer from './../features/audio/gameAudioSlice';
+import multiPlayerGameReducer from './../features/gameMultiPlayer/multiPlayerGameSlice';
 
 export const store = configureStore({
     reducer: {
@@ -15,7 +15,7 @@ export const store = configureStore({
         pageSwitcher: pageSwitcherReducer,
         screen: screenReducer,
         singlePlayerGame: singlePlayerGameReducer,
-        multiPlayerGame: multiplayerGameReducer,
+        multiPlayerGame: multiPlayerGameReducer,
         gameAudio: gameAudioReducer,
         [wordSearchAPI.reducerPath]: wordSearchAPI.reducer,
 

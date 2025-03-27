@@ -41,7 +41,7 @@ export const multiPlayerGameSlice = createSlice({
         },
         setCurrentPlayer: (state, action) => {
             state.currentPlayer = action.payload;
-        }
+        },
     }
 })
 

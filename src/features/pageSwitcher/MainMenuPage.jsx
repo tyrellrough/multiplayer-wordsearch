@@ -1,6 +1,6 @@
 import NavigationButton from "./NavigationButton.jsx";
-import LoadGameListButton from "../gameMultiplayer/LoadGameListButton.jsx";
-import NewMultiplayerButton from "../gameMultiplayer/NewMultiplayerButton.jsx";
+import LoadGameListButton from "../gameMultiPlayer/LoadGameListButton.jsx";
+import NewMultiplayerButton from "../gameMultiPlayer/NewMultiplayerButton.jsx";
 
 
 export default function MainMenuPage() {

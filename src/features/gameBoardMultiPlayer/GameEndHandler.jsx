@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {setCurrentPageState, setLobbyState} from "../gameMultiplayer/multiPlayerGameSlice.js";
+import {setCurrentPageState, setLobbyState} from "../gameMultiPlayer/multiPlayerGameSlice.js";
 
 export default function GameEndHandler(props) {
     const gameGuid = useSelector(state => state.multiPlayerGame.gameGUID)
