@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { wordSearchAPI } from "../services/wordSearchAPI.js";
 
+//trying to fix these
 import gameOptionsReducer from './../features/gameOptions/gameOptionsSlice';
 import pageSwitcherReducer from './../features/pageSwitcher/pageSwitcherSlice';
 import screenReducer from './../features/screen/screenSlice';
