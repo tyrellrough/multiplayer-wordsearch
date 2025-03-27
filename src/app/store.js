@@ -6,8 +6,8 @@ import gameOptionsReducer from './../features/gameOptions/gameOptionsSlice.js';
 import pageSwitcherReducer from './../features/pageSwitcher/pageSwitcherSlice.js';
 import screenReducer from './../features/screen/screenSlice.js';
 import singlePlayerGameReducer from './../features/gameSinglePlayer/singlePlayerGameSlice.js';
-import multiPlayerGameReducer from './../features/gameMultiplayer/multiPlayerGameSlice.js';
 import gameAudioReducer from './../features/audio/gameAudioSlice.js';
+import multiPlayerGameReducer from './../features/gameMultiplayer/multiPlayerGameSlice.js';
 
 export const store = configureStore({
     reducer: {
