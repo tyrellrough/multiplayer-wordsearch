@@ -1,7 +1,7 @@
-import MultiplayerWordSearchCanvas from "../gameBoardMultiplayer/MultiplayerWordSearchCanvas.jsx";
-import MultiplayerWordsList from "../gameBoardMultiplayer/MultiplayerWordsList.jsx";
-import GameStatsOverlay from "../gameBoardMultiplayer/GameStatsOverlay.jsx";
-import GameStats from "../gameBoardMultiplayer/GameStats.jsx";
+import MultiplayerWordSearchCanvas from "../gameBoardMultiPlayer/MultiplayerWordSearchCanvas.jsx";
+import MultiplayerWordsList from "../gameBoardMultiPlayer/MultiplayerWordsList.jsx";
+import GameStatsOverlay from "../gameBoardMultiPlayer/GameStatsOverlay.jsx";
+import GameStats from "../gameBoardMultiPlayer/GameStats.jsx";
 
 
 export default function GameContainerMultiplayer(props) {

@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import PlayerStatElement from "./PlayerStatElement.jsx";
-import ColouredSquare from "../gameMultiplayer/ColouredSquare.jsx";
+import ColouredSquare from "../gameMultiPlayer/ColouredSquare.jsx";
 
 export default function WinnerDisplayText(props) {
     const [winners, setWinners] = useState([]);

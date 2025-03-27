@@ -1,4 +1,4 @@
-import ColouredSquare from "../gameMultiplayer/ColouredSquare.jsx";
+import ColouredSquare from "../gameMultiPlayer/ColouredSquare.jsx";
 
 export default function PlayerStatElement(props) {
 

@@ -2,7 +2,7 @@ import './App.css'
 import {useSelector} from "react-redux";
 import MainMenuPage from "./features/pageSwitcher/MainMenuPage.jsx";
 import SinglePlayerPage from "./features/pageSwitcher/SinglePlayerPage.jsx";
-import MultiplayerPage from "./features/gameMultiplayer/MultiplayerPage.jsx";
+import MultiplayerPage from "./features/gameMultiPlayer/MultiplayerPage.jsx";
 import NavigationBar from "./features/pageSwitcher/NavigationBar.jsx";
 import GameContainerSinglePlayer from "./features/gameSinglePlayer/GameContainerSinglePlayer.jsx";
 

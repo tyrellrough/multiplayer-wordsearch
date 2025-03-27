@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useSelector} from "react-redux";
-import PlayerColourInfo from "../gameMultiplayer/PlayerColourInfo.jsx";
+import PlayerColourInfo from "../gameMultiPlayer/PlayerColourInfo.jsx";
 import PlayerStatElement from "./PlayerStatElement.jsx";
 import WinnerDisplayText from "./WinnerDisplayText.jsx";
 import GameEndHandler from "./GameEndHandler.jsx";

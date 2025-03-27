@@ -11,7 +11,7 @@ import {
 
 } from "./multiPlayerGameSlice.js";
 import Colours from "../gameBoard/Colours.js";
-import PlayerStatElement from "../gameBoardMultiplayer/PlayerStatElement.jsx";
+import PlayerStatElement from "../gameBoardMultiPlayer/PlayerStatElement.jsx";
 import PlayerInfo from "./PlayerInfo.jsx";
 
 export default function Lobby(props) {
